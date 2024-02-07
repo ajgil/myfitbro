@@ -1,4 +1,4 @@
-import 'package:myfitbro/features/auth/application/controllers/controllers.dart';
+//import 'package:myfitbro/features/auth/application/controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,7 +19,7 @@ class DashboardScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        actions: const [],
+        //actions: const [],
       ),
     /*     
       body: organization.when(

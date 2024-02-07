@@ -10,15 +10,15 @@ class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
 
   /// Named route for [AuthScreen]
-  static const String route = 'auth';
+  //static const String route = 'auth';
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
         
-        child: SignInWithGoogleButton()
-        //child: LoginScreen()
+        //child: SignInWithGoogleButton()
+        child: LoginScreen()
         
 
         

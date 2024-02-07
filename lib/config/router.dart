@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:myfitbro/features/auth/auth_provider.dart';
 import 'package:myfitbro/features/auth/presentation/screens/auth_screen.dart';
+import 'package:myfitbro/features/auth/presentation/screens/check_auth_status_screen.dart';
+import 'package:myfitbro/features/auth/presentation/widgets/login_screen.dart';
 import 'package:myfitbro/features/common/presentation/screens/error_screen.dart';
 import 'package:myfitbro/features/common/presentation/utils/extensions/ui_extension.dart';
 import 'package:myfitbro/features/dashboard/presentation/screens/dashboard_screen.dart';
@@ -26,16 +30,24 @@ import 'package:go_router/go_router.dart';
 ///
 ///
 final router = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/splash',
   routes: [
+    // primera pantalla
+    GoRoute(
+      path: '/splash',
+      builder: (context, state) => const CheckAuthStatusScreen(),
+    ),
+
+    // Auth routes
+    GoRoute(
+      path: '/login',
+      //name: AuthScreen.route,
+      builder: (context, state) => const  AuthScreen(),
+    ),
     GoRoute(
       path: '/',
-      builder: (context, state) => const DashboardScreen(),),
-    
-    GoRoute(
-      path: '/${AuthScreen.route}',
-      name: AuthScreen.route,
-      builder: (context, state) => const AuthScreen(),
+           //name: AuthScreen.route,
+      builder: (context, state) => const DashboardScreen(),
     ),
   ],
   observers: [
@@ -43,19 +55,24 @@ final router = GoRouter(
   ],
   redirect: (context, state) {
     final loggedIn = authStateListenable.value;
-    final goingToLogin = state.matchedLocation.contains('/${AuthScreen.route}');
 
+    final goingToLogin = state.matchedLocation.contains('/$AuthScreen');
+    // final goingToLogin = state.matchedLocation.contains('/splash');
+    
     if (!loggedIn && !goingToLogin) {
-      return '/${AuthScreen.route}';
+      
+      return '/login';
     }
-    if (loggedIn && goingToLogin) return '/dashboard';
+    if (loggedIn && goingToLogin) return '/';
 
     return null;
   },
   refreshListenable: authStateListenable,
   debugLogDiagnostics: true,
-  errorBuilder: (context, state) => ErrorScreen(message: context.tr.somethingWentWrong),
+  errorBuilder: (context, state) =>
+      ErrorScreen(message: context.tr.somethingWentWrong),
 );
 
 /// Route observer to use with RouteAware
-final RouteObserver<ModalRoute<void>> routeObserver = RouteObserver<ModalRoute<void>>();
+final RouteObserver<ModalRoute<void>> routeObserver =
+    RouteObserver<ModalRoute<void>>();

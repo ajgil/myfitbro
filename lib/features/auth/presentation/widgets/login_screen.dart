@@ -35,10 +35,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               email: email.text.trim(),
               password: password.text.trim(),
             );
+        
         if (mounted) {
           //ref.read(appRouterProvider).pop();
           context.pop();
         }
+        
       } catch (e) {
         context.showAlert(e.toString());
       } finally {

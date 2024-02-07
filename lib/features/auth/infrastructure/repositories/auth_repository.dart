@@ -147,7 +147,7 @@ class AuthRepository implements AuthRepositoryInterface {
   @override
   Future<Either<Failure, UserEntity>> signIn(
       {required String email, required String password}) async {
-    log('login method');
+    log('AuthRepository login');
 
     try {
       final response =
@@ -158,7 +158,7 @@ class AuthRepository implements AuthRepositoryInterface {
         await authTokenLocalDataSource.remove();
         return left(const Failure.unauthorized());
       }
-      log('user: $user');
+      //log('user: $user');
       return right(UserEntity.fromJson(user.toJson()));
     } catch (_) {
       return left(const Failure.unauthorized());
