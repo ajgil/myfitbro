@@ -1,9 +1,8 @@
 import 'package:myfitbro/features/auth/auth_provider.dart';
+import 'package:myfitbro/features/auth/domain/entities/user_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'sign_in_with_google_controller.g.dart';
-
-///Sign in with google
 
 @riverpod
 class SignInWithGoogleController extends _$SignInWithGoogleController {
@@ -13,14 +12,9 @@ class SignInWithGoogleController extends _$SignInWithGoogleController {
   }
 
   Future<void> singIn({required String email, required String password}) async {
-    final res = await ref
+    await ref
         .read(authRepositoryProvider)
         .signIn(email: email, password: password);
-    res.fold((l) {
-      state = AsyncError(l, StackTrace.current);
-    }, (r) {
-      state = AsyncData(r);
-    });
   }
 
   Future<void> signUp({
@@ -42,14 +36,9 @@ class SignInWithGoogleController extends _$SignInWithGoogleController {
     required String email,
     required String token,
   }) async {
-    final res = await ref
+    await ref
         .read(authRepositoryProvider)
         .verifyOtp(email: email, token: token);
-    res.fold((l) {
-      state = AsyncError(l, StackTrace.current);
-    }, (r) {
-      state = AsyncData(r);
-    });
   }
 
   /// Signs in using Supabase auth

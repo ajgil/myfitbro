@@ -4,6 +4,21 @@ import 'package:fpdart/fpdart.dart';
 
 ///
 abstract class AuthRepositoryInterface {
+  // SignUp with credentials
+  Future<Either<Failure, bool>> signUp({
+    required String email,
+    required String password,
+    required String username,
+  });
+
+  // Verify otp token
+  Future<Either<Failure, UserEntity>> verifyOtp(
+      {required String email, required String token});
+
+  // SignIn with credentials
+  Future<Either<Failure, UserEntity>> signIn(
+      {required String email, required String password});
+
   /// Sign in with Google
   Future<Either<Failure, bool>> signInWithGoogle();
 

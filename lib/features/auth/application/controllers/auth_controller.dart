@@ -26,7 +26,7 @@ class AuthController extends _$AuthController {
       _updateAuthState(userEntity);
     });
     return userEntity;
-    // TODO(vh): how to cancel subscription override dispose
+    // TODO: how to cancel subscription override dispose
   }
 
   void _updateAuthState(UserEntity? userEntity) {

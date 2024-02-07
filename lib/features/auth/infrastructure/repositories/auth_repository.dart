@@ -101,55 +101,68 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   // singup method
+  @override
   Future<Either<Failure, bool>> signUp({
     required String email,
     required String password,
     required String username,
   }) async {
     log('signup');
-    //final res = 
-    await authClient.signUp(
-      email: email,
-      password: password,
-      data: {'username': username},
-    );
-    /*
-    if (!res) {
+    try {
+      await authClient.signUp(
+        email: email,
+        password: password,
+        data: {'username': username},
+      );
+      return right(true);
+    } catch (_) {
       return left(const Failure.badRequest());
     }
-    */
-    return right(true);
   }
 
   // VerifyCode
-  Future<Either<Failure, bool>> verifyOtp(
+  @override
+  Future<Either<Failure, UserEntity>> verifyOtp(
       {required String email, required String token}) async {
     log('otp code');
-    await authClient.verifyOTP(
+    try {
+      final response =
+          await authClient.verifyOTP(
         email: email, token: token, type: supabase.OtpType.signup);
-    /*
-    final res = await authClient.verifyOTP(
-        email: email, token: code, type: supabase.OtpType.signup);
-    if (!res) {
-      return left(const Failure.badRequest());
+      final user = response.user;
+
+      if (user == null) {
+        await authTokenLocalDataSource.remove();
+        return left(const Failure.unauthorized());
+      }
+      log('user verified: $user');
+      return right(UserEntity.fromJson(user.toJson()));
+    } catch (_) {
+      return left(const Failure.unauthorized());
     }
-    */
-    return right(true);
+
   }
 
   // Login method
-  Future<Either<Failure, bool>> signIn(
+  @override
+  Future<Either<Failure, UserEntity>> signIn(
       {required String email, required String password}) async {
     log('login method');
-    await authClient.signInWithPassword(email: email, password: password);
-    /*
-    final res =
-        await authClient.signInWithPassword(email: email, password: password);
-    if (!res) {
-      return left(const Failure.badRequest());
+
+    try {
+      final response =
+          await authClient.signInWithPassword(email: email, password: password);
+      final user = response.user;
+
+      if (user == null) {
+        await authTokenLocalDataSource.remove();
+        return left(const Failure.unauthorized());
+      }
+      log('user: $user');
+      return right(UserEntity.fromJson(user.toJson()));
+    } catch (_) {
+      return left(const Failure.unauthorized());
     }
-    */
-    return right(true);
   }
 
   /// SignIn user with Third party Google
