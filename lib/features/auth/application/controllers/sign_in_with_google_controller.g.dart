@@ -7,7 +7,7 @@ part of 'sign_in_with_google_controller.dart';
 // **************************************************************************
 
 String _$signInWithGoogleControllerHash() =>
-    r'd03f80ca765ae2c6de5adc584f32212e059b60d1';
+    r'1f20f19f3fc1b649fe64b07b37c4d0784e0193d7';
 
 ///Sign in with google
 ///

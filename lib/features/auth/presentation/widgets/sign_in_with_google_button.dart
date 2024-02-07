@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:myfitbro/features/auth/application/sign_in_with_google_controller.dart';
+import 'package:myfitbro/features/auth/application/controllers/controllers.dart';
 import 'package:myfitbro/features/common/presentation/utils/extensions/ui_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

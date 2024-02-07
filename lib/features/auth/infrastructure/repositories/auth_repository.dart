@@ -19,8 +19,9 @@ class AuthRepository implements AuthRepositoryInterface {
   final supabase.GoTrueClient authClient;
 
   /// Current authorized User
-  UserEntity? get currentUser =>
-      authClient.currentUser == null ? null : UserEntity.fromJson(authClient.currentUser!.toJson());
+  UserEntity? get currentUser => authClient.currentUser == null
+      ? null
+      : UserEntity.fromJson(authClient.currentUser!.toJson());
 
   /// Returns Stream with auth user changes
   @override
@@ -31,7 +32,8 @@ class AuthRepository implements AuthRepositoryInterface {
       switch (data.event) {
         case supabase.AuthChangeEvent.signedIn:
         case supabase.AuthChangeEvent.userUpdated:
-        case supabase.AuthChangeEvent.initialSession when data.session?.user != null:
+        case supabase.AuthChangeEvent.initialSession
+            when data.session?.user != null:
         case supabase.AuthChangeEvent.mfaChallengeVerified:
           callback(
             UserEntity.fromJson(data.session!.user.toJson()),
@@ -50,12 +52,13 @@ class AuthRepository implements AuthRepositoryInterface {
     });
   }
 
-  ///
+  /// Set token to local
   @override
   Future<Either<Failure, UserEntity>> setSession(String token) async {
     try {
       final response = await authClient.setSession(token);
-      await authTokenLocalDataSource.store(response.session?.providerToken ?? '');
+      await authTokenLocalDataSource
+          .store(response.session?.providerToken ?? '');
 
       final user = response.user;
 
@@ -79,7 +82,8 @@ class AuthRepository implements AuthRepositoryInterface {
         return left(const Failure.empty());
       }
 
-      final response = await authClient.recoverSession(res.getOrElse((_) => ''));
+      final response =
+          await authClient.recoverSession(res.getOrElse((_) => ''));
       final user = response.user;
 
       if (user == null) {
@@ -87,7 +91,8 @@ class AuthRepository implements AuthRepositoryInterface {
         return left(const Failure.unauthorized());
       }
 
-      await authTokenLocalDataSource.store(response.session?.providerToken ?? '');
+      await authTokenLocalDataSource
+          .store(response.session?.providerToken ?? '');
 
       return right(UserEntity.fromJson(user.toJson()));
     } catch (_) {
@@ -95,7 +100,59 @@ class AuthRepository implements AuthRepositoryInterface {
     }
   }
 
-  /// Signs in user to the application
+  // singup method
+  Future<Either<Failure, bool>> signUp({
+    required String email,
+    required String password,
+    required String username,
+  }) async {
+    log('signup');
+    //final res = 
+    await authClient.signUp(
+      email: email,
+      password: password,
+      data: {'username': username},
+    );
+    /*
+    if (!res) {
+      return left(const Failure.badRequest());
+    }
+    */
+    return right(true);
+  }
+
+  // VerifyCode
+  Future<Either<Failure, bool>> verifyOtp(
+      {required String email, required String token}) async {
+    log('otp code');
+    await authClient.verifyOTP(
+        email: email, token: token, type: supabase.OtpType.signup);
+    /*
+    final res = await authClient.verifyOTP(
+        email: email, token: code, type: supabase.OtpType.signup);
+    if (!res) {
+      return left(const Failure.badRequest());
+    }
+    */
+    return right(true);
+  }
+
+  // Login method
+  Future<Either<Failure, bool>> logIn(
+      {required String email, required String password}) async {
+    log('login method');
+    await authClient.signInWithPassword(email: email, password: password);
+    /*
+    final res =
+        await authClient.signInWithPassword(email: email, password: password);
+    if (!res) {
+      return left(const Failure.badRequest());
+    }
+    */
+    return right(true);
+  }
+
+  /// SignIn user with Third party Google
   @override
   Future<Either<Failure, bool>> signInWithGoogle() async {
     log('here2');

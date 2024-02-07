@@ -14,13 +14,13 @@ import 'package:go_router/go_router.dart';
 
 /// Main router for the myfitbro app
 ///
-/// ! Pay attention to the order of routes.
+//! Pay attention to the order of routes.
 /// Create:  myfitbro/create
 /// View:    myfitbro/:eid
 /// Edit:    myfitbro/:eid/edit
 /// where :edit means myfitbro entity id.
 ///
-/// ! Note about parameters
+//! Note about parameters
 /// Router keeps parameters in global map. It means that if you create route
 /// organization/:id and organization/:id/department/:id. Department id will
 ///  override organization id. So use :oid and :did instead of :id

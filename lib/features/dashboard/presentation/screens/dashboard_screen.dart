@@ -1,4 +1,4 @@
-import 'package:myfitbro/features/auth/application/auth_controller.dart';
+import 'package:myfitbro/features/auth/application/controllers/controllers.dart';
 import 'package:myfitbro/features/departments/presentation/widgets/departments_list.dart';
 import 'package:myfitbro/features/organization/application/organization_view_controller.dart';
 import 'package:flutter/material.dart';
