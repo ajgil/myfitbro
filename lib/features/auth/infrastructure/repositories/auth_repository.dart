@@ -168,7 +168,7 @@ class AuthRepository implements AuthRepositoryInterface {
   /// SignIn user with Third party Google
   @override
   Future<Either<Failure, bool>> signInWithGoogle() async {
-    log('here2');
+    log('google login');
     final res = await authClient.signInWithOAuth(
       supabase.OAuthProvider.google,
     );

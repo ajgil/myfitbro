@@ -17,8 +17,8 @@ class AuthScreen extends StatelessWidget {
     return const Scaffold(
       body: Center(
         
-        //child: SignInWithGoogleButton()
-        child: LoginScreen()
+        child: SignInWithGoogleButton()
+        //child: LoginScreen()
         
 
         

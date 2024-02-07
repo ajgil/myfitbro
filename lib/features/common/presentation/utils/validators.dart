@@ -1,5 +1,5 @@
 //import 'package:myfitbro/features/common/presentation/utils/extensions/ui_extension.dart';
-import 'package:myfitbro/features/organization/domain/values/organization_name.dart';
+
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart';
 
@@ -35,9 +35,4 @@ mixin FormValidator<T extends StatefulWidget> on State<T> {
     return null;
   }
 
-  /// Name field validator. Should not be empty
-  String? organizationNameValidator(String? value) {
-    if (!shouldValidate) return null;
-    return OrganizationName(value).value.fold((l) => null, (r) => r);
-  }
 }

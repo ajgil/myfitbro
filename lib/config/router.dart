@@ -3,11 +3,7 @@ import 'package:myfitbro/features/auth/presentation/screens/auth_screen.dart';
 import 'package:myfitbro/features/common/presentation/screens/error_screen.dart';
 import 'package:myfitbro/features/common/presentation/utils/extensions/ui_extension.dart';
 import 'package:myfitbro/features/dashboard/presentation/screens/dashboard_screen.dart';
-import 'package:myfitbro/features/departments/presentation/screens/departments_create_screen.dart';
-import 'package:myfitbro/features/departments/presentation/screens/departments_edit_screen.dart';
-import 'package:myfitbro/features/departments/presentation/screens/departments_view_screen.dart';
-import 'package:myfitbro/features/organization/presentation/screens/organization_create_screen.dart';
-import 'package:myfitbro/features/organization/presentation/screens/organizations_list_screen.dart';
+
 import 'package:myfitbro/flavors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -30,54 +26,12 @@ import 'package:go_router/go_router.dart';
 ///
 ///
 final router = GoRouter(
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',
-      name: OrganizationsListScreen.routeName,
-      builder: (context, state) => const OrganizationsListScreen(),
-      routes: [
-        GoRoute(
-          path: OrganizationsCreateScreen.routePath,
-          name: OrganizationsCreateScreen.routeName,
-          builder: (context, state) => const OrganizationsCreateScreen(),
-        ),
-        GoRoute(
-          path: '${DashboardScreen.routePath}/:oid',
-          name: DashboardScreen.routeName,
-          builder: (context, state) => DashboardScreen(
-            title: F.title,
-            organizationId: state.pathParameters['oid']!,
-          ),
-          routes: [
-            GoRoute(
-              path: DepartmentsCreateScreen.routePath,
-              name: DepartmentsCreateScreen.routeName,
-              builder: (context, state) => const DepartmentsCreateScreen(),
-            ),
-            GoRoute(
-              path: DepartmentsViewScreen.routePath,
-              name: DepartmentsViewScreen.routeName,
-              builder: (context, state) => DepartmentsViewScreen(
-                id: state.pathParameters['did']!,
-              ),
-            ),
-            GoRoute(
-              path: DepartmentsEditScreen.routePath,
-              name: DepartmentsEditScreen.routeName,
-              builder: (context, state) => DepartmentsEditScreen(
-                id: state.pathParameters['did']!,
-              ),
-            ),
-          ],
-        ),
-
-        // GoRoute(
-        //   path: UserOrganizationsPage.route,
-        //   name: UserOrganizationsPage.route,
-        //   builder: (context, state) => const UserOrganizationsPage(),
-        // )
-      ],
-    ),
+      builder: (context, state) => const DashboardScreen(),),
+    
     GoRoute(
       path: '/${AuthScreen.route}',
       name: AuthScreen.route,
@@ -94,7 +48,7 @@ final router = GoRouter(
     if (!loggedIn && !goingToLogin) {
       return '/${AuthScreen.route}';
     }
-    if (loggedIn && goingToLogin) return '/';
+    if (loggedIn && goingToLogin) return '/dashboard';
 
     return null;
   },

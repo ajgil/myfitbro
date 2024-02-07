@@ -40,7 +40,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           context.pop();
         }
       } catch (e) {
-        //context.showAlert(e.toString());
+        context.showAlert(e.toString());
       } finally {
         setState(() {
           isLoading = false;
