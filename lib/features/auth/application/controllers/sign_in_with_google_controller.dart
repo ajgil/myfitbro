@@ -12,6 +12,17 @@ class SignInWithGoogleController extends _$SignInWithGoogleController {
     return false;
   }
 
+  Future<void> singIn({required String email, required String password}) async {
+    final res = await ref
+        .read(authRepositoryProvider)
+        .signIn(email: email, password: password);
+    res.fold((l) {
+      state = AsyncError(l, StackTrace.current);
+    }, (r) {
+      state = AsyncData(r);
+    });
+  }
+
   Future<void> signUp({
     required String email,
     required String password,

@@ -138,7 +138,7 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   // Login method
-  Future<Either<Failure, bool>> logIn(
+  Future<Either<Failure, bool>> signIn(
       {required String email, required String password}) async {
     log('login method');
     await authClient.signInWithPassword(email: email, password: password);
