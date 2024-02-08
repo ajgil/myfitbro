@@ -1,5 +1,5 @@
 import 'package:myfitbro/features/auth/presentation/widgets/sign_in_with_google_button.dart';
-import 'package:myfitbro/features/auth/presentation/widgets/login_screen.dart';
+import 'package:myfitbro/features/auth/presentation/screens/login_screen.dart';
 
 
 import 'package:flutter/material.dart';
