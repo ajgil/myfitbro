@@ -6,24 +6,21 @@ part of 'sign_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$signInWithGoogleControllerHash() =>
-    r'24c55aff0226d15c247e4a857e2b6a6d64cb6d14';
+String _$signControllerHash() => r'1641bff3b5d374c6ca4d98404709fb4e6aac9daf';
 
-///Sign in with google
-///
-/// Copied from [SignInWithGoogleController].
-@ProviderFor(SignInWithGoogleController)
-final signInWithGoogleControllerProvider =
-    AutoDisposeAsyncNotifierProvider<SignInWithGoogleController, bool>.internal(
-  SignInWithGoogleController.new,
-  name: r'signInWithGoogleControllerProvider',
+/// See also [SignController].
+@ProviderFor(SignController)
+final signControllerProvider =
+    AutoDisposeAsyncNotifierProvider<SignController, bool>.internal(
+  SignController.new,
+  name: r'signControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$signInWithGoogleControllerHash,
+      : _$signControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SignInWithGoogleController = AutoDisposeAsyncNotifier<bool>;
+typedef _$SignController = AutoDisposeAsyncNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

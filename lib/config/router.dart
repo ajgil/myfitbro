@@ -29,11 +29,12 @@ import 'package:go_router/go_router.dart';
 ///
 ///
 final router = GoRouter(
-  initialLocation: '/splash',
+  //initialLocation: '/splash',
   routes: [
     // primera pantalla
     GoRoute(
-      path: '/splash',
+      path: '/${CheckAuthStatusScreen.route}',
+      //path: '/splash',
       builder: (context, state) => const CheckAuthStatusScreen(),
     ),
 
