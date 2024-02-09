@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfitbro/features/auth/application/controllers/auth_controller.dart';
+import 'package:myfitbro/features/auth/auth_provider.dart';
 
 /// Main page for authorized users
 class DashboardScreen extends ConsumerWidget {
@@ -25,7 +26,7 @@ class DashboardScreen extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
-            onPressed: () => ref.read(authControllerProvider.notifier).signOut(),
+            onPressed: () => ref.read(authRepositoryProvider).signOut(),
             
           ),
         ],

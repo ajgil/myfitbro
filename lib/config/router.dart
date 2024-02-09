@@ -7,7 +7,7 @@ import 'package:myfitbro/features/common/presentation/screens/error_screen.dart'
 import 'package:myfitbro/features/common/presentation/utils/extensions/ui_extension.dart';
 import 'package:myfitbro/features/dashboard/presentation/screens/dashboard_screen.dart';
 
-import 'package:myfitbro/flavors.dart';
+//import 'package:myfitbro/flavors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,12 +29,11 @@ import 'package:go_router/go_router.dart';
 ///
 ///
 final router = GoRouter(
-  //initialLocation: '/splash',
+  initialLocation: '/splash',
   routes: [
     // primera pantalla
     GoRoute(
-      path: '/${CheckAuthStatusScreen.route}',
-      //path: '/splash',
+      path: '/splash',
       builder: (context, state) => const CheckAuthStatusScreen(),
     ),
 
@@ -44,6 +43,7 @@ final router = GoRouter(
       //name: AuthScreen.route,
       builder: (context, state) => const LoginScreen(),
     ),
+
     GoRoute(
       path: '/',
       //name: AuthScreen.route,
@@ -54,20 +54,42 @@ final router = GoRouter(
     routeObserver,
   ],
   redirect: (context, state) {
-    final loggedIn = authStateListenable.value;
+    final authStatus = authStateListenable.value;
+    final isGoingTo = state.matchedLocation.contains;
 
-    final goingToLogin = state.matchedLocation.contains('/splash');
+    // ignore: unrelated_type_equality_checks
+    if (isGoingTo == '/splash' && authStatus == true) return null;
 
-    log(loggedIn.toString());
-    print('GoRouter authStatus $loggedIn, isGoingTo $goingToLogin');
+    if (authStatus == false) {
+      // ignore: unrelated_type_equality_checks
+      if (isGoingTo == '/login') return null;
 
-    if (loggedIn == false && goingToLogin) {
       return '/login';
     }
-    if (loggedIn) return '/';
+    if (authStatus == true) {
+      // ignore: unrelated_type_equality_checks
+      if (isGoingTo == '/login' || isGoingTo == '/splash') {
+        return '/';
+      }
+    }
+    return null;
+  },
+
+  /*
+   redirect: (context, state) {
+    final loggedIn = authStateListenable.value;
+    final goingToLogin = state.matchedLocation.contains('/${CheckAuthStatusScreen.route}');
+
+    // ignore: unrelated_type_equality_checks
+    if (loggedIn == false && goingToLogin == false) {
+      return '/${CheckAuthStatusScreen.route}';
+    }
+    if (loggedIn == true && goingToLogin == true) return '/';
 
     return null;
   },
+
+*/
   refreshListenable: authStateListenable,
   debugLogDiagnostics: true,
   errorBuilder: (context, state) =>

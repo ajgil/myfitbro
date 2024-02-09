@@ -15,7 +15,7 @@ class SignInWithGoogleButton extends ConsumerWidget {
     return ElevatedButton(
       onPressed: () {
         try {
-          ref.read(signInWithGoogleControllerProvider.notifier).signInWithGoogle();
+          ref.read(signControllerProvider.notifier).signInWithGoogle();
         } catch (e) {
           log(e.toString());
         }

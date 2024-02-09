@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myfitbro/features/auth/application/controllers/sign_in_with_google_controller.dart';
+import 'package:myfitbro/features/auth/application/controllers/sign_controller.dart';
 
 import '../../../shared/widgets/widgets.dart';
 
@@ -31,7 +31,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           isLoading = true;
         });
 
-        await ref.read(signInWithGoogleControllerProvider.notifier).singIn(
+        await ref.read(signControllerProvider.notifier).singIn(
               email: email.text.trim(),
               password: password.text.trim(),
             );
