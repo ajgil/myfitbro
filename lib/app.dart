@@ -1,4 +1,5 @@
-import 'package:myfitbro/config/router/router.dart';
+//import 'package:myfitbro/config/router/router.dart';
+import 'package:myfitbro/config/router.dart';
 import 'package:myfitbro/config/theme/app_theme.dart';
 import 'package:myfitbro/flavors.dart';
 import 'package:flutter/material.dart';

@@ -57,13 +57,13 @@ final router = GoRouter(
 
     final goingToLogin = state.matchedLocation.contains('/splash');
 
-    //print('GoRouter authStatus $loggedIn, isGoingTo $goingToLogin');
+    log(loggedIn.toString());
+    print('GoRouter authStatus $loggedIn, isGoingTo $goingToLogin');
 
-
-    if (!loggedIn && !goingToLogin) {
+    if (loggedIn == false && goingToLogin) {
       return '/login';
     }
-    if (loggedIn && goingToLogin) return '/';
+    if (loggedIn) return '/';
 
     return null;
   },

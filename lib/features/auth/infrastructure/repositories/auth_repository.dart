@@ -147,7 +147,7 @@ class AuthRepository implements AuthRepositoryInterface {
   @override
   Future<Either<Failure, UserEntity>> signIn(
       {required String email, required String password}) async {
-    log('AuthRepository login');
+    //log('metodo login de AuthRepository');
 
     try {
       final response =

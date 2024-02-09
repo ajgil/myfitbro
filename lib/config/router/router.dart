@@ -44,7 +44,7 @@ final router = GoRouter(
 
     print('GoRouter authStatus $loggedIn, isGoingTo $isGoingTo');
 
-    if (!loggedIn && !goingToLogin) {
+    if (!loggedIn) {
       return '/login';
     }
     if (loggedIn && goingToLogin) return '/';
