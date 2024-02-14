@@ -126,9 +126,8 @@ class AuthRepository implements AuthRepositoryInterface {
       {required String email, required String token}) async {
     log('otp code');
     try {
-      final response =
-          await authClient.verifyOTP(
-        email: email, token: token, type: supabase.OtpType.signup);
+      final response = await authClient.verifyOTP(
+          email: email, token: token, type: supabase.OtpType.signup);
       final user = response.user;
 
       if (user == null) {
@@ -140,7 +139,6 @@ class AuthRepository implements AuthRepositoryInterface {
     } catch (_) {
       return left(const Failure.unauthorized());
     }
-
   }
 
   // Login method
@@ -153,6 +151,7 @@ class AuthRepository implements AuthRepositoryInterface {
       final response =
           await authClient.signInWithPassword(email: email, password: password);
       final user = response.user;
+      log('$user');
 
       if (user == null) {
         await authTokenLocalDataSource.remove();

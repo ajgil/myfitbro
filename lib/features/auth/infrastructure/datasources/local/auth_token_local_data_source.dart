@@ -9,7 +9,7 @@ class AuthTokenLocalDataSource {
 
   final SharedPreferences _prefs;
 
-  static const _key = 'auth_token';
+  static const _key = 'access_token';
 
   /// get the token from the device storage
   Either<Failure, String> get() {

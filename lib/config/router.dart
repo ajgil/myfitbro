@@ -29,11 +29,12 @@ import 'package:go_router/go_router.dart';
 ///
 ///
 final router = GoRouter(
-  initialLocation: '/splash',
+  //initialLocation: '/splash',
   routes: [
     // primera pantalla
     GoRoute(
-      path: '/splash',
+      path: '/${CheckAuthStatusScreen.route}',
+      name: CheckAuthStatusScreen.route,
       builder: (context, state) => const CheckAuthStatusScreen(),
     ),
 
@@ -46,7 +47,6 @@ final router = GoRouter(
 
     GoRoute(
       path: '/',
-      //name: AuthScreen.route,
       builder: (context, state) => const DashboardScreen(),
     ),
   ],
@@ -54,42 +54,18 @@ final router = GoRouter(
     routeObserver,
   ],
   redirect: (context, state) {
-    final authStatus = authStateListenable.value;
-    final isGoingTo = state.matchedLocation.contains;
-
-    // ignore: unrelated_type_equality_checks
-    if (isGoingTo == '/splash' && authStatus == true) return null;
-
-    if (authStatus == false) {
-      // ignore: unrelated_type_equality_checks
-      if (isGoingTo == '/login') return null;
-
-      return '/login';
-    }
-    if (authStatus == true) {
-      // ignore: unrelated_type_equality_checks
-      if (isGoingTo == '/login' || isGoingTo == '/splash') {
-        return '/';
-      }
-    }
-    return null;
-  },
-
-  /*
-   redirect: (context, state) {
     final loggedIn = authStateListenable.value;
     final goingToLogin = state.matchedLocation.contains('/${CheckAuthStatusScreen.route}');
 
-    // ignore: unrelated_type_equality_checks
-    if (loggedIn == false && goingToLogin == false) {
+    log('$loggedIn' ' going to auth ' '$goingToLogin');
+
+    if (!loggedIn && !goingToLogin) {
       return '/${CheckAuthStatusScreen.route}';
     }
-    if (loggedIn == true && goingToLogin == true) return '/';
+    if (loggedIn && goingToLogin) return '/';
 
     return null;
   },
-
-*/
   refreshListenable: authStateListenable,
   debugLogDiagnostics: true,
   errorBuilder: (context, state) =>
