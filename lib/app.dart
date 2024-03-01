@@ -1,6 +1,5 @@
 //import 'package:myfitbro/config/router/router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myfitbro/config/router.dart';
 import 'package:myfitbro/config/router/router.dart';
 import 'package:myfitbro/config/theme/app_theme.dart';
 import 'package:myfitbro/flavors.dart';
@@ -22,9 +21,6 @@ class MyFitBro extends ConsumerWidget {
       theme: AppTheme().getTheme(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       routerConfig: ref.watch(routerProvider),
-      //routeInformationParser: router.routeInformationParser,
-      //routerDelegate: router.routerDelegate,
-      //routeInformationProvider: router.routeInformationProvider,
     );
   }
 }
