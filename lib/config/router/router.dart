@@ -1,62 +1,89 @@
-import 'package:myfitbro/features/auth/auth_provider.dart';
-import 'package:myfitbro/features/auth/presentation/screens/login_screen.dart';
-import 'package:myfitbro/features/auth/presentation/screens/check_auth_status_screen.dart';
-import 'package:myfitbro/features/common/presentation/screens/error_screen.dart';
-import 'package:myfitbro/features/common/presentation/utils/extensions/ui_extension.dart';
-import 'package:myfitbro/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:myfitbro/config/router/router_path.dart';
+import 'package:myfitbro/features/auth/presentation/screens/login_screen.dart';
+import 'package:myfitbro/features/auth/providers/auth_provider.dart';
+import 'package:myfitbro/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-/// Main router for the myfitbro app
+part 'router.g.dart';
 
-final router = GoRouter(
-  initialLocation: '/splash',
-  routes: [
-    // primera pantalla
-    GoRoute(
-      path: '/splash',
-      builder: (context, state) => const CheckAuthStatusScreen(),
-    ),
+@riverpod
+GoRouter router(RouterRef ref) {
+  final authState = ref.watch(authRepositoryProvider);
 
-    //* Auth routes
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => const LoginScreen(),
-    ),
-    GoRoute(
-      path: '/signup',
-      builder: (context, state) => const LoginScreen(),
-    ),
-    GoRoute(
-      path: '/',
-      //name: AuthScreen.route,
-      builder: (context, state) => const DashboardScreen(),
-    ),
-  ],
-  observers: [
-    routeObserver,
-  ],
-  redirect: (context, state) {
-    final loggedIn = authStateListenable.value;
-    final isGoingTo = state.matchedLocation;
-    final goingToLogin = state.matchedLocation.contains('/splash');
+  return GoRouter(
+      initialLocation: RouterPath.signin,
+      redirect: (context, state) async {
+        //final loggedIn = authState.value?.session?.user != null;
+        final loggedIn = authState.authClient.currentSession?.user != null;
 
-    print('GoRouter authStatus $loggedIn, isGoingTo $isGoingTo');
+         log('variable loggedIn: $loggedIn');
 
-    if (!loggedIn) {
-      return '/login';
-    }
-    if (loggedIn && goingToLogin) return '/';
-
-    return null;
-  },
-  refreshListenable: authStateListenable,
-  debugLogDiagnostics: true,
-  errorBuilder: (context, state) =>
-      ErrorScreen(message: context.tr.somethingWentWrong),
-);
-
-/// Route observer to use with RouteAware
-final RouteObserver<ModalRoute<void>> routeObserver =
-    RouteObserver<ModalRoute<void>>();
+        switch (state.matchedLocation) {
+          case RouterPath.signin:
+            if (loggedIn) {
+              return RouterPath.home;
+            } else {
+              return RouterPath.signin;
+            }
+          case RouterPath.signup:
+            if (loggedIn) {
+              return RouterPath.home;
+            } else {
+              return RouterPath.signup;
+            }
+          case RouterPath.home:
+            if (loggedIn) {
+              return RouterPath.home;
+            } else {
+              return RouterPath.signin;
+            }
+          default:
+            return null;
+        }
+      },
+      routes: [
+        GoRoute(
+          path: RouterPath.signin,
+          name: RouterPath.signin,
+          builder: (context, state) => const LoginScreen(),
+          routes: [
+          
+            GoRoute(
+              path: RouterPath.signup,
+              name: RouterPath.signup,
+              builder: (context, state) {
+                return const DashboardScreen(); //const SignUpPage();
+              },
+            ),
+           
+            GoRoute(
+              path: RouterPath.document,
+              name: RouterPath.document,
+              builder: (context, state) {
+                return const DashboardScreen(); //return const DocumentPage();
+              },
+            ),
+          ],
+        ),
+        GoRoute(
+          path: RouterPath.home,
+          name: RouterPath.home,
+          builder: (context, state) {
+            return const DashboardScreen();
+          },
+        ),
+      ],
+      // Pangina no encontrada -> 404
+      errorPageBuilder: (context, state) {
+        return const MaterialPage(
+            child: Scaffold(
+          body: Center(
+            child: Text('Page not found'),
+          ),
+        ));
+      });
+}

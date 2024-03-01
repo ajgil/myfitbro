@@ -1,4 +1,4 @@
-import 'package:myfitbro/features/auth/auth_provider.dart';
+import 'package:myfitbro/features/auth/providers/auth_provider.dart';
 import 'package:myfitbro/features/auth/domain/entities/user_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uni_links/uni_links.dart';
