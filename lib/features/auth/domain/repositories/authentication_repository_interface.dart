@@ -1,9 +1,9 @@
 import 'package:myfitbro/features/auth/domain/entities/user_entity.dart';
-import 'package:myfitbro/features/common/domain/failures/failure.dart';
+import 'package:myfitbro/core/errors/failures/failure.dart';
 import 'package:fpdart/fpdart.dart';
 
-///
-abstract class AuthRepositoryInterface {
+//! Interface
+abstract class AuthenticationRepositoryInterface {
   // SignUp with credentials
   Future<Either<Failure, bool>> signUp({
     required String email,

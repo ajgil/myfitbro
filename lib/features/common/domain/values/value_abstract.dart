@@ -1,4 +1,4 @@
-import 'package:myfitbro/features/common/domain/failures/failure.dart';
+import 'package:myfitbro/core/errors/failures/failure.dart';
 import 'package:fpdart/fpdart.dart';
 
 /// Provides specification for value objects

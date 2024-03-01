@@ -1,11 +1,11 @@
-import 'package:myfitbro/features/common/domain/failures/failure.dart';
+import 'package:myfitbro/core/errors/failures/failure.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Manage token in device storage
-class AuthTokenLocalDataSource {
+class AuthenticationTokenLocalDataSource {
   /// Default constructor for [AuthTokenLocalDataSource]
-  AuthTokenLocalDataSource(this._prefs);
+  AuthenticationTokenLocalDataSource(this._prefs);
 
   final SharedPreferences _prefs;
 

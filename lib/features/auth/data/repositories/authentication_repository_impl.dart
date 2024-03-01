@@ -1,19 +1,19 @@
 import 'dart:developer';
 
 import 'package:myfitbro/features/auth/domain/entities/user_entity.dart';
-import 'package:myfitbro/features/auth/domain/repositories/auth_repository_interface.dart';
-import 'package:myfitbro/features/auth/infrastructure/datasources/local/auth_token_local_data_source.dart';
-import 'package:myfitbro/features/common/domain/failures/failure.dart';
+import 'package:myfitbro/features/auth/domain/repositories/authentication_repository_interface.dart';
+import 'package:myfitbro/features/auth/data/datasources/local/authentication_local_data_source.dart';
+import 'package:myfitbro/core/errors/failures/failure.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
 /// Repository that handles authorization and persists session
-class AuthRepository implements AuthRepositoryInterface {
+class AuthenticationRepositoryImplementation implements AuthenticationRepositoryInterface {
   /// Default constructor
-  AuthRepository(this.authTokenLocalDataSource, this.authClient);
+  AuthenticationRepositoryImplementation(this.authTokenLocalDataSource, this.authClient);
 
   /// local token storage provider
-  final AuthTokenLocalDataSource authTokenLocalDataSource;
+  final AuthenticationTokenLocalDataSource authTokenLocalDataSource;
 
   /// Exposes Supabase auth client to allow Auth Controller to subscribe to auth changes
   final supabase.GoTrueClient authClient;
