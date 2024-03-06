@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfitbro/config/router/router.dart';
@@ -35,12 +37,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               email: email.text.trim(),
               password: password.text.trim(),
             );
-        
+
         if (mounted) {
           ref.read(routerProvider).pop();
           //context.pop();
         }
-        
       } catch (e) {
         context.showAlert(e.toString());
       } finally {

@@ -9,7 +9,7 @@ class CustomTextFormField extends StatelessWidget {
   final Function(String)? onChanged;
   final Function(String)? onFieldSubmitted;
   final String? Function(String?)? validator;
-  //final TextEditingController controller;
+  final TextEditingController controller;
 
   const CustomTextFormField({
     super.key,
@@ -21,7 +21,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.onFieldSubmitted,
     this.validator,
-    //required this.controller,
+    required this.controller,
   });
 
   @override
@@ -49,7 +49,7 @@ class CustomTextFormField extends StatelessWidget {
                 offset: const Offset(0, 5))
           ]),
       child: TextFormField(
-        //controller: controller,
+        controller: controller,
         onChanged: onChanged,
         validator: validator,
         onFieldSubmitted: onFieldSubmitted,
