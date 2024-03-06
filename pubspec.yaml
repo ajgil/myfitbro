@@ -16,6 +16,7 @@ dependencies:
   equatable: ^2.0.5
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.1.0
   flutter_localization: ^0.2.0
   flutter_localizations:
     sdk: flutter
@@ -54,6 +55,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - local.config.json
+    - .env
     - google_fonts/montserrat_alternates/
 
 flavorizr:

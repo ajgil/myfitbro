@@ -1,29 +1,25 @@
-import 'dart:convert';
+
 
 import 'package:myfitbro/config/providers.dart' as providers;
 import 'package:myfitbro/flavors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'features/common/infraestructure/entities/environment.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+
+
+
 
 /// Initializes services and controllers before the start of the application
 Future<ProviderContainer> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+
   final container = ProviderContainer(
     overrides: [], //supabaseProvider.overrideWithValue(Supabase.instance)
     observers: [if (F.appFlavor == Flavor.local) _Logger()],
   );
-  final configFile = await rootBundle.loadString(F.envFileName);
-  final env = Environment.fromJson(json.decode(configFile) as Map<String, dynamic>);
-
-  await Supabase.initialize(
-    url: env.supabaseUrl,
-    anonKey: env.supabaseAnonKey,
-  );
+  
   await providers.initializeProviders(container);
   return container;
 }
