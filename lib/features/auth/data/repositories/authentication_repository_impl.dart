@@ -150,7 +150,7 @@ class AuthenticationRepositoryImplementation implements AuthenticationRepository
       final response =
           await authClient.signInWithPassword(email: email, password: password);
       final user = response.user;
-      log('$user');
+      log('auth_rep_impl -> $user');
 
       if (user == null) {
         await authTokenLocalDataSource.remove();
