@@ -2,7 +2,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:myfitbro/core/errors/failures/failure.dart';
-
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 
