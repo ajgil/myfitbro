@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfitbro/config/router/router.dart';
-import 'package:myfitbro/features/auth/application/controllers/sign_controller.dart';
+import 'package:myfitbro/features/auth/data/datasources/remote/auth_remote_repository.dart';
 
 import '../../../shared/widgets/widgets.dart';
 
@@ -33,7 +31,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           isLoading = true;
         });
 
-        await ref.read(signControllerProvider.notifier).singIn(
+        await ref.read(authRemoteRepositoryProvider).login(
               email: email.text.trim(),
               password: password.text.trim(),
             );
