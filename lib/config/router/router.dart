@@ -15,36 +15,10 @@ GoRouter router(RouterRef ref) {
   final authState = ref.watch(authRemoteRepositoryProvider);
 
   return GoRouter(
+    debugLogDiagnostics: true,
       initialLocation: RouterPath.signin,
-      
-      redirect: (context, state) async {
-        final loggedIn = authState.currentSession?.user != null;
 
-        log('variable loggedIn: $loggedIn');
 
-        switch (state.matchedLocation) {
-          case RouterPath.signin:
-            if (loggedIn) {
-              return RouterPath.home;
-            } else {
-              return RouterPath.signin;
-            }
-          case RouterPath.signup:
-            if (loggedIn) {
-              return RouterPath.home;
-            } else {
-              return RouterPath.signup;
-            }
-          case RouterPath.home:
-            if (loggedIn) {
-              return RouterPath.home;
-            } else {
-              return RouterPath.signin;
-            }
-          default:
-            return null;
-        }
-      },
       routes: [
         GoRoute(
           path: RouterPath.signin,
@@ -75,6 +49,44 @@ GoRouter router(RouterRef ref) {
           },
         ),
       ],
+
+
+
+      redirect: (context, state) async {
+
+        // If our async state is loading, don't perform redirects, yet
+        //if (authState.isLoading || authState.hasError) return null;
+
+        final loggedIn = authState.currentSession?.user != null;
+
+        log('variable loggedIn: $loggedIn');
+        log('state location $state');
+
+
+        switch (state.matchedLocation) {
+          case RouterPath.signin:
+            if (loggedIn) {
+              return RouterPath.home;
+            } else {
+              return RouterPath.signin;
+            }
+          case RouterPath.signup:
+            if (loggedIn) {
+              return RouterPath.home;
+            } else {
+              return RouterPath.signup;
+            }
+          case RouterPath.home:
+            if (loggedIn) {
+              return RouterPath.home;
+            } else {
+              return RouterPath.signin;
+            }
+          default:
+            return null;
+        }
+      },
+      
       // Pangina no encontrada -> 404
       errorPageBuilder: (context, state) {
         return const MaterialPage(

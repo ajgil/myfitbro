@@ -18,9 +18,7 @@ GoRouter router(RouterRef ref) {
   return GoRouter(
       initialLocation: RouterPath.signin,
       redirect: (context, state) async {
-        //final loggedIn = authState.value?.session?.user != null;
         final loggedIn = authState.currentSession?.user != null;
-        //final loggedIn = auth.authState.curr
 
          log('variable loggedIn: $loggedIn');
 

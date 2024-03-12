@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myfitbro/config/router/router.dart';
 import 'package:myfitbro/features/auth/data/datasources/remote/auth_remote_repository.dart';
 
@@ -37,11 +38,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             );
 
         if (mounted) {
-          ref.read(routerProvider).pop();
-          //context.pop();
+          //ref.read(routerProvider).pop();
+          //context.push('/home');
+          context.go('/home');
         }
       } catch (e) {
-        context.showAlert(e.toString());
+        //context.showAlert(e.toString());
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('$e')));
       } finally {
         setState(() {
           isLoading = false;
