@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:myfitbro/config/router/router_path.dart';
 import 'package:myfitbro/features/auth/data/datasources/remote/auth_remote_repository.dart';
 import 'package:myfitbro/features/auth/presentation/screens/login_screen.dart';
+import 'package:myfitbro/features/auth/providers/auth_provider.dart';
 import 'package:myfitbro/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -16,11 +17,12 @@ GoRouter router(RouterRef ref) {
 
   return GoRouter(
       initialLocation: RouterPath.signin,
-      
       redirect: (context, state) async {
+        //final loggedIn = authState.value?.session?.user != null;
         final loggedIn = authState.currentSession?.user != null;
+        //final loggedIn = auth.authState.curr
 
-        log('variable loggedIn: $loggedIn');
+         log('variable loggedIn: $loggedIn');
 
         switch (state.matchedLocation) {
           case RouterPath.signin:
@@ -51,6 +53,7 @@ GoRouter router(RouterRef ref) {
           name: RouterPath.signin,
           builder: (context, state) => const LoginScreen(),
           routes: [
+          
             GoRoute(
               path: RouterPath.signup,
               name: RouterPath.signup,
@@ -58,6 +61,7 @@ GoRouter router(RouterRef ref) {
                 return const DashboardScreen(); //const SignUpPage();
               },
             ),
+           
             GoRoute(
               path: RouterPath.document,
               name: RouterPath.document,

@@ -13,6 +13,8 @@ class AuthRemoteRepository {
 
   Stream<AuthState> get authState => _client.auth.onAuthStateChange;
 
+  get currentSession => _client.auth.currentSession;
+
   Future<AuthResponse> login(
       {required String email, required String password}) async {
     return _client.auth.signInWithPassword(email: email, password: password);
