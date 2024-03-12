@@ -1,6 +1,7 @@
 //import 'package:myfitbro/features/auth/application/controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myfitbro/config/router/router.dart';
 import 'package:myfitbro/features/auth/data/datasources/remote/auth_remote_repository.dart';
 
 
@@ -22,11 +23,15 @@ class DashboardScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title:const Text('myfitbro app'),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
-            onPressed: () => ref.read(authRemoteRepositoryProvider).logout(),
+            onPressed: () {
+              ref.read(authRemoteRepositoryProvider).logout();
+              ref.read(routerProvider).go('/signup');
+
+            } 
             
           ),
         ],
