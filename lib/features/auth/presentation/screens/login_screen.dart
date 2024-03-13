@@ -40,7 +40,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         if (mounted) {
           //ref.read(routerProvider).pop();
           //context.go('/home');
-          ref.read(routerProvider).go('/home');
+          ref.read(appRouterProvider).go('/home');
         }
       } catch (e) {
         //context.showAlert(e.toString());
@@ -77,7 +77,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             SizedBox(
                 width: double.infinity,
                 height: 60,
-                child: CustomFilledButton(
+                child: 
+                CustomFilledButton(
                   text: 'Entrar',
                   buttonColor: Colors.black,
                   onPressed: isLoading
@@ -87,14 +88,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         },
                 )),
             const Spacer(flex: 2),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('¿No tienes cuenta?'),
-                //TextButton(
-                //onPressed: context.push('/signup'),
-                //onPressed: () => ref.read(appRouterProvider).push('/signup'),//context.push('/signup'),
-                //child: const Text('Crea una aquí'))
+                const Text('¿No tienes cuenta?'),
+                TextButton(
+      
+                onPressed: () => ref.read(appRouterProvider).push('/signup'),
+                child: const Text('Crea una aquí'))
               ],
             ),
             const Spacer(flex: 1),

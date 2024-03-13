@@ -13,7 +13,7 @@ class MyFitBro extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final routes = ref.read(routerProvider);
+    final routes = ref.watch(appRouterProvider);
     return MaterialApp.router(
       title: F.title,
       //theme: AppTheme(Brightness.light).themeData,
