@@ -22,8 +22,8 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
   final _passwordCtrl = TextEditingController();
   final _usernameCtrl = TextEditingController();
 
-
   Future<void> _createAccount() async {
+    if (!context.mounted) return;
     try {
       setState(() {
         _isSubmitting = true;
@@ -34,7 +34,6 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
           username: _usernameCtrl.text);
 
       if (mounted) {
-
         ref.read(appRouterProvider).push('/verifyopt',
             extra: VerificationParamsScreen(
                 email: _emailCtrl.text,
@@ -42,26 +41,29 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                 username: _usernameCtrl.text));
       }
     } catch (e) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$e')));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final textStyles = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Registrar'),
+        title: const Text('MyFitBro - registro'),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 30,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Form(
           key: _formKey,
           autovalidateMode: _autovalidateMode,
           child: Column(
             children: [
+              const SizedBox(height: 50),
+              Text('Registro', style: textStyles.titleLarge),
+              const SizedBox(height: 90),
               CustomTextFormField(
                 controller: _usernameCtrl,
                 label: 'Usuario',
@@ -98,7 +100,6 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your password';
                   }
-
                   return null;
                 },
                 //readOnly: _isSubmitting,
