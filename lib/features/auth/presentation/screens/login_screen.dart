@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfitbro/config/router/router.dart';
-import 'package:myfitbro/features/auth/application/controllers/sign_controller.dart';
+import 'package:myfitbro/features/auth/data/datasources/remote/auth_remote_repository.dart';
 
 import '../../../shared/widgets/widgets.dart';
 
@@ -33,17 +31,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           isLoading = true;
         });
 
-        await ref.read(signControllerProvider.notifier).singIn(
+        await ref.read(authRemoteRepositoryProvider).login(
               email: email.text.trim(),
               password: password.text.trim(),
             );
 
         if (mounted) {
-          ref.read(routerProvider).pop();
-          //context.pop();
+          //ref.read(appRouterProvider).go('/home');
+          //ref.read(appRouterProvider).pop();
+          ref.read(appRouterProvider).push('/home');
         }
       } catch (e) {
-        context.showAlert(e.toString());
+        
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('$e')));
       } finally {
         setState(() {
           isLoading = false;
@@ -52,7 +53,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('MyFitBro')),
+      appBar: AppBar(title: const Text('MyFitBro - login')),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Column(
@@ -75,7 +76,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             SizedBox(
                 width: double.infinity,
                 height: 60,
-                child: CustomFilledButton(
+                child: 
+                CustomFilledButton(
                   text: 'Entrar',
                   buttonColor: Colors.black,
                   onPressed: isLoading
@@ -85,14 +87,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         },
                 )),
             const Spacer(flex: 2),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('¿No tienes cuenta?'),
-                //TextButton(
-                //onPressed: context.push('/signup'),
-                //onPressed: () => ref.read(appRouterProvider).push('/signup'),//context.push('/signup'),
-                //child: const Text('Crea una aquí'))
+                const Text('¿No tienes cuenta?'),
+                TextButton(
+      
+                onPressed: () => ref.read(appRouterProvider).push('/signup'),
+                child: const Text('Crea una aquí'))
               ],
             ),
             const Spacer(flex: 1),

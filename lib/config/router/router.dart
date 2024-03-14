@@ -3,24 +3,70 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myfitbro/config/router/router_path.dart';
+import 'package:myfitbro/features/auth/data/datasources/remote/auth_remote_repository.dart';
 import 'package:myfitbro/features/auth/presentation/screens/login_screen.dart';
-import 'package:myfitbro/features/auth/providers/auth_provider.dart';
+import 'package:myfitbro/features/auth/presentation/screens/singup_screen.dart';
+import 'package:myfitbro/features/auth/presentation/screens/verification_params_screen.dart';
 import 'package:myfitbro/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
 
 @riverpod
-GoRouter router(RouterRef ref) {
-  final authState = ref.watch(authRepositoryProvider);
+GoRouter appRouter(AppRouterRef ref) {
+  final authState = ref.watch(authRemoteRepositoryProvider);
 
   return GoRouter(
+      debugLogDiagnostics: true,
       initialLocation: RouterPath.signin,
+      routes: [
+        GoRoute(
+          path: RouterPath.signin,
+          name: RouterPath.signin,
+          builder: (context, state) => const LoginScreen(),
+          routes: [
+            GoRoute(
+              path: RouterPath.document,
+              name: RouterPath.document,
+              builder: (context, state) {
+                return const DashboardScreen(); //return const DocumentPage();
+              },
+            ),
+          ],
+        ),
+        GoRoute(
+          path: RouterPath.signup,
+          name: RouterPath.signup,
+          builder: (context, state) {
+            return const SignUpScreen();
+          },
+        ),
+        GoRoute(
+          path: RouterPath.verifyotp,
+          name: RouterPath.verifyotp,
+          builder: (context, state) {
+            final params = state.extra as VerificationParamsScreen?;
+            if (params == null) {
+              throw 'Missinig `VerificationPageParams` object';
+            }
+            return VerificationScreen(params: params);
+          },
+        ),
+        GoRoute(
+          path: RouterPath.home,
+          name: RouterPath.home,
+          builder: (context, state) {
+            return const DashboardScreen();
+          },
+        ),
+      ],
       redirect: (context, state) async {
-        //final loggedIn = authState.value?.session?.user != null;
-        final loggedIn = authState.authClient.currentSession?.user != null;
+        // If our async state is loading, don't perform redirects, yet
+        //if (authState.isLoading || authState.hasError) return null;
 
-         log('variable loggedIn: $loggedIn');
+        final loggedIn = authState.currentSession?.user != null;
+
+        log('variable loggedIn: $loggedIn');
 
         switch (state.matchedLocation) {
           case RouterPath.signin:
@@ -45,38 +91,7 @@ GoRouter router(RouterRef ref) {
             return null;
         }
       },
-      routes: [
-        GoRoute(
-          path: RouterPath.signin,
-          name: RouterPath.signin,
-          builder: (context, state) => const LoginScreen(),
-          routes: [
-          
-            GoRoute(
-              path: RouterPath.signup,
-              name: RouterPath.signup,
-              builder: (context, state) {
-                return const DashboardScreen(); //const SignUpPage();
-              },
-            ),
-           
-            GoRoute(
-              path: RouterPath.document,
-              name: RouterPath.document,
-              builder: (context, state) {
-                return const DashboardScreen(); //return const DocumentPage();
-              },
-            ),
-          ],
-        ),
-        GoRoute(
-          path: RouterPath.home,
-          name: RouterPath.home,
-          builder: (context, state) {
-            return const DashboardScreen();
-          },
-        ),
-      ],
+
       // Pangina no encontrada -> 404
       errorPageBuilder: (context, state) {
         return const MaterialPage(

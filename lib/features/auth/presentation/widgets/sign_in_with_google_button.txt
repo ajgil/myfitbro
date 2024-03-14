@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:myfitbro/features/auth/application/controllers/controllers.dart';
+import 'package:myfitbro/features/auth/data/datasources/remote/auth_remote_repository.dart';
 import 'package:myfitbro/features/common/presentation/utils/extensions/ui_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +16,7 @@ class SignInWithGoogleButton extends ConsumerWidget {
     return ElevatedButton(
       onPressed: () {
         try {
-          ref.read(signControllerProvider.notifier).signInWithGoogle();
+          ref.read(authRemoteRepositoryProvider).signInWithGoogle();
         } catch (e) {
           log(e.toString());
         }

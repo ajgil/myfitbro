@@ -1,10 +1,10 @@
-import 'package:myfitbro/l10n/app_localizations.dart';
+//import 'package:myfitbro/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 /// A set of useful [BuildContext] extensions
 extension BuildContextX on BuildContext {
   /// Extensions for quickly accessing generated localization getters
-  AppLocalizations get tr => AppLocalizations.of(this)!;
+  //AppLocalizations get tr => AppLocalizations.of(this)!;
 
   /// Extension for quickly accessing app [ColorScheme]
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
