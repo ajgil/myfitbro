@@ -96,12 +96,12 @@ class _VerificationParamsScreen extends ConsumerState<VerificationScreen> {
               const SizedBox(height: 50),
               Text(
                   'Introduce el código de verificación enviado a ${widget.params.email}',
-                  style: textStyles.titleLarge),
+                  style: textStyles.titleMedium),
               const SizedBox(height: 30),
               CustomTextFormField(
                 controller: _codeCtrl,
                 //readOnly: _isSubmitting,
-                label: 'Verification code',
+                label: 'Código',
 
                 keyboardType: TextInputType.name,
                 validator: (value) {
@@ -112,14 +112,6 @@ class _VerificationParamsScreen extends ConsumerState<VerificationScreen> {
                 },
               ),
               const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: _isSubmitting ? null : _resendCode,
-                  child: const Text('Resend Code'),
-                ),
-              ),
-              const SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
                 height: 60,
@@ -137,6 +129,16 @@ class _VerificationParamsScreen extends ConsumerState<VerificationScreen> {
                           }
                         },
                 ),
+              ),
+              const Spacer(flex: 2),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('¿No has recibido el código?'),
+                  TextButton(
+                      onPressed: _isSubmitting ? null : _resendCode,
+                      child: const Text('Solicita uno nuevo aquí'))
+                ],
               ),
             ],
           ),
