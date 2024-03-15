@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfitbro/config/router/router.dart';
 import 'package:myfitbro/features/auth/data/datasources/remote/auth_remote_repository.dart';
+import 'package:myfitbro/features/presentation/widgets/widgets.dart';
 
 /// Main page for authorized users
-class DashboardScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerWidget {
   /// Default constructor for [DashboardScreen] widget
-  const DashboardScreen({
+  const HomeScreen({
     super.key,
   });
 
@@ -20,6 +21,13 @@ class DashboardScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        title: const CustomAppbar(),
+        centerTitle: true,
+        leading: const Icon(Icons.account_circle),
+      ),
+      
+      /*
+      AppBar(
         title: const Text('myfitbro app'),
         actions: [
           IconButton(
@@ -30,9 +38,9 @@ class DashboardScreen extends ConsumerWidget {
               }),
         ],
       ),
-      body: const Center(
-        child: Text('Dentro!', style: TextStyle(fontSize: 30)),
-      ),
+      */
+      body: const _HomeView(),
+      bottomNavigationBar: const CustomBottomNavigation(),
       /*     
       body: organization.when(
         data: (data) {
@@ -64,4 +72,34 @@ class DashboardScreen extends ConsumerWidget {
     */
     );
   }
+}
+
+class _HomeView extends ConsumerStatefulWidget {
+
+  const _HomeView();
+
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends ConsumerState<_HomeView> {
+  
+  @override
+  void initState() {
+    super.initState();
+    
+    //! add los providers que queramos consumir
+    //ref.read( upcomingMoviesProvider.notifier ).loadNextPage();
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    return const Center(
+        child: Text('Main dashboard', style: TextStyle(fontSize: 20)),
+      );
+  }
+  
+
 }

@@ -7,7 +7,7 @@ import 'package:myfitbro/features/auth/data/datasources/remote/auth_remote_repos
 import 'package:myfitbro/features/auth/presentation/screens/login_screen.dart';
 import 'package:myfitbro/features/auth/presentation/screens/singup_screen.dart';
 import 'package:myfitbro/features/auth/presentation/screens/verification_params_screen.dart';
-import 'package:myfitbro/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:myfitbro/features/presentation/screens/home_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
@@ -29,7 +29,7 @@ GoRouter appRouter(AppRouterRef ref) {
               path: RouterPath.document,
               name: RouterPath.document,
               builder: (context, state) {
-                return const DashboardScreen(); //return const DocumentPage();
+                return const HomeScreen(); //return const DocumentPage();
               },
             ),
           ],
@@ -56,7 +56,7 @@ GoRouter appRouter(AppRouterRef ref) {
           path: RouterPath.home,
           name: RouterPath.home,
           builder: (context, state) {
-            return const DashboardScreen();
+            return const HomeScreen();
           },
         ),
       ],
