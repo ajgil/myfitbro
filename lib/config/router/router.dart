@@ -8,6 +8,8 @@ import 'package:myfitbro/features/auth/presentation/screens/login_screen.dart';
 import 'package:myfitbro/features/auth/presentation/screens/singup_screen.dart';
 import 'package:myfitbro/features/auth/presentation/screens/verification_params_screen.dart';
 import 'package:myfitbro/features/presentation/screens/home_screen.dart';
+import 'package:myfitbro/features/presentation/screens/stats_screen.dart';
+import 'package:myfitbro/features/presentation/screens/wods_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
@@ -24,15 +26,6 @@ GoRouter appRouter(AppRouterRef ref) {
           path: RouterPath.signin,
           name: RouterPath.signin,
           builder: (context, state) => const LoginScreen(),
-          routes: [
-            GoRoute(
-              path: RouterPath.document,
-              name: RouterPath.document,
-              builder: (context, state) {
-                return const HomeScreen(); //return const DocumentPage();
-              },
-            ),
-          ],
         ),
         GoRoute(
           path: RouterPath.signup,
@@ -56,7 +49,25 @@ GoRouter appRouter(AppRouterRef ref) {
           path: RouterPath.home,
           name: RouterPath.home,
           builder: (context, state) {
-            return const HomeScreen();
+            const pageIndex = 0;
+            return const HomeScreen(
+              pageIndex: pageIndex,
+            );
+          },
+        ),
+        GoRoute(
+          path: RouterPath.stats,
+          name: RouterPath.stats,
+          builder: (context, state) {
+            //const pageIndex = 1;
+            return const StatsScreen();
+          },
+        ),
+        GoRoute(
+          path: RouterPath.wods,
+          name: RouterPath.wods,
+          builder: (context, state) {
+            return const WodScreen();
           },
         ),
       ],

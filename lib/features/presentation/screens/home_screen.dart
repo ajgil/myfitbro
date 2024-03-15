@@ -7,8 +7,12 @@ import 'package:myfitbro/features/presentation/widgets/widgets.dart';
 
 /// Main page for authorized users
 class HomeScreen extends ConsumerWidget {
+
+    // propiedades navegacion entre tabs y vistas
+  final int pageIndex;
+
   /// Default constructor for [DashboardScreen] widget
-  const HomeScreen({
+  const HomeScreen({required this.pageIndex, 
     super.key,
   });
 
@@ -24,6 +28,7 @@ class HomeScreen extends ConsumerWidget {
         title: const CustomAppbar(),
         centerTitle: true,
         leading: const Icon(Icons.account_circle),
+        
       ),
       
       /*
@@ -40,7 +45,7 @@ class HomeScreen extends ConsumerWidget {
       ),
       */
       body: const _HomeView(),
-      bottomNavigationBar: const CustomBottomNavigation(),
+      bottomNavigationBar: CustomBottomNavigation(currentIndex: pageIndex,),
       /*     
       body: organization.when(
         data: (data) {
