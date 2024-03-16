@@ -28,7 +28,6 @@ class DetailsScreen extends StatefulWidget {
   State<StatefulWidget> createState() => DetailsScreenState();
 }
 
-
 /// The state for DetailsScreen
 class DetailsScreenState extends State<DetailsScreen> {
   int _counter = 0;
