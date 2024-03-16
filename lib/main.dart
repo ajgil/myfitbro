@@ -19,6 +19,7 @@ void main() async {
   runApp( const
     ProviderScope(
       child: MyFitBro(),
+      //child:ShellRouteExampleApp(),
     ),
   );
 }

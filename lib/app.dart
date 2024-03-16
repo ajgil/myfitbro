@@ -13,14 +13,16 @@ class MyFitBro extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final routes = ref.watch(appRouterProvider);
+    //final routes = ref.watch(appRouterProvider);
+    final _routes = ref.watch(appRouterProvider);
     return MaterialApp.router(
       title: F.title,
       //theme: AppTheme(Brightness.light).themeData,
       //darkTheme: AppTheme(Brightness.dark).themeData,
       theme: AppTheme().getTheme(),
       //localizationsDelegates: AppLocalizations.localizationsDelegates,
-      routerConfig: routes,
+      //routerConfig: routes,
+      routerConfig: _routes,
     );
   }
 }

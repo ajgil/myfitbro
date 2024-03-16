@@ -1,0 +1,119 @@
+
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+final GlobalKey<NavigatorState> _rootNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'root');
+final GlobalKey<NavigatorState> _shellNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'shell');
+
+// This scenario demonstrates how to set up nested navigation using ShellRoute,
+// which is a pattern where an additional Navigator is placed in the widget tree
+// to be used instead of the root navigator. This allows deep-links to display
+// pages along with other UI components such as a BottomNavigationBar.
+//
+// This example demonstrates how use topRoute in a ShellRoute to create the
+// title in the AppBar above the child, which is different for each GoRoute.
+
+void main() {
+  runApp(ShellRouteExampleApp());
+}
+
+/// An example demonstrating how to use [ShellRoute]
+class ShellRouteExampleApp extends StatelessWidget {
+  /// Creates a [ShellRouteExampleApp]
+  ShellRouteExampleApp({super.key});
+
+  final GoRouter _router = GoRouter(
+    navigatorKey: _rootNavigatorKey,
+    initialLocation: '/a',
+    debugLogDiagnostics: true,
+    routes: <RouteBase>[
+      /// Application shell
+      ShellRoute(
+        navigatorKey: _shellNavigatorKey,
+        builder: (BuildContext context, GoRouterState state, Widget child) {
+          final String? routeName = GoRouterState.of(context).topRoute?.name;
+          // This title could also be created using a route's path parameters in GoRouterState
+          final String title = switch (routeName) {
+            'a' => 'A Screen',
+            'a.details' => 'A Details',
+            'b' => 'B Screen',
+            'b.details' => 'B Details',
+            'c' => 'C Screen',
+            'c.details' => 'C Details',
+            _ => 'Unknown',
+          };
+          return ScaffoldWithNavBar(title: title, child: child);
+        },
+        routes: <RouteBase>[
+          /// The first screen to display in the bottom navigation bar.
+          GoRoute(
+            // The name of this route used to determine the title in the ShellRoute.
+            name: 'a',
+            path: '/a',
+            builder: (BuildContext context, GoRouterState state) {
+              return const ScreenA();
+            },
+            routes: <RouteBase>[
+              // The details screen to display stacked on the inner Navigator.
+              // This will cover screen A but not the application shell.
+              GoRoute(
+                // The name of this route used to determine the title in the ShellRoute.
+                name: 'a.details',
+                path: 'details',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const DetailsScreen(label: 'A');
+                },
+              ),
+            ],
+          ),
+
+          /// Displayed when the second item in the the bottom navigation bar is
+          /// selected.
+          GoRoute(
+            // The name of this route used to determine the title in the ShellRoute.
+            name: 'b',
+            path: '/b',
+            builder: (BuildContext context, GoRouterState state) {
+              return const ScreenB();
+            },
+            routes: <RouteBase>[
+              // The details screen to display stacked on the inner Navigator.
+              // This will cover screen B but not the application shell.
+              GoRoute(
+                // The name of this route used to determine the title in the ShellRoute.
+                name: 'b.details',
+                path: 'details',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const DetailsScreen(label: 'B');
+                },
+              ),
+            ],
+          ),
+
+          /// The third screen to display in the bottom navigation bar.
+          GoRoute(
+            // The name of this route used to determine the title in the ShellRoute.
+            name: 'c',
+            path: '/c',
+            builder: (BuildContext context, GoRouterState state) {
+              return const ScreenC();
+            },
+            routes: <RouteBase>[
+              // The details screen to display stacked on the inner Navigator.
+              // This will cover screen C but not the application shell.
+              GoRoute(
+                // The name of this route used to determine the title in the ShellRoute.
+                name: 'c.details',
+                path: 'details',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const DetailsScreen(label: 'C');
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    ],
+  );
