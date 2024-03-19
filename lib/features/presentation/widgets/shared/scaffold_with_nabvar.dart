@@ -31,9 +31,16 @@ class ScaffoldWithNavBar extends StatelessWidget {
         // world scenario, the items would most likely be generated from the
         // branches of the shell route, which can be fetched using
         // `navigationShell.route.branches`.
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Section A'),
-          BottomNavigationBarItem(icon: Icon(Icons.work), label: 'Section B'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add_box_outlined), label: 'Add'),
+          
+          BottomNavigationBarItem(
+              icon: Icon(Icons.fitness_center), label: 'WODs'),
+          BottomNavigationBarItem(icon: Icon(Icons.stacked_bar_chart), label: 'Stats'),
         ],
         currentIndex: navigationShell.currentIndex,
         onTap: (int index) => _onTap(context, index),
@@ -57,7 +64,6 @@ class ScaffoldWithNavBar extends StatelessWidget {
     );
   }
 }
-
 
 /// Custom branch Navigator container that provides animated transitions
 /// when switching branches.
@@ -98,4 +104,3 @@ class AnimatedBranchContainer extends StatelessWidget {
         ),
       );
 }
-

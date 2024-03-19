@@ -10,13 +10,13 @@ class RootScreenA extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Root of section A'),
+        title: const Text('Root of home'),
       ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text('Screen A', style: Theme.of(context).textTheme.titleLarge),
+            Text('Screen home', style: Theme.of(context).textTheme.titleLarge),
             const Padding(padding: EdgeInsets.all(4)),
             TextButton(
               onPressed: () {
