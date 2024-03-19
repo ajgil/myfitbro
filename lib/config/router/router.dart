@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myfitbro/features/presentation/screens/details.dart';
 import 'package:myfitbro/features/presentation/screens/root_screen_a.dart';
+import 'package:myfitbro/features/presentation/screens/stats_screen.dart';
+import 'package:myfitbro/features/presentation/screens/wods_screen.dart';
 import 'package:myfitbro/features/presentation/widgets/shared/scaffold_with_nabvar.dart';
 import 'package:myfitbro/features/presentation/widgets/shared/tabb_screen.dart';
 import 'package:myfitbro/features/presentation/widgets/shared/tabbed_root_screen.dart';
@@ -77,6 +79,32 @@ final GlobalKey<NavigatorState> _tabANavigatorKey =
             ],
           ),
 
+          
+          StatefulShellBranch(
+            routes: <RouteBase>[
+              GoRoute(
+                // The screen to display as the root in the first tab of the
+                // bottom navigation bar.
+                path: '/c',
+                builder: (BuildContext context, GoRouterState state) =>
+                    const WodScreen(),
+                routes: <RouteBase>[
+                  // The details screen to display stacked on navigator of the
+                  // first tab. This will cover screen A but not the application
+                  // shell (bottom navigation bar).
+                  GoRoute(
+                    path: 'details',
+                    builder: (BuildContext context, GoRouterState state) =>
+                        const DetailsScreen(label: 'WODs'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+
+
+
+
           // The route branch for the third tab of the bottom navigation bar.
           StatefulShellBranch(
             // StatefulShellBranch will automatically use the first descendant
@@ -148,7 +176,32 @@ final GlobalKey<NavigatorState> _tabANavigatorKey =
               ),
             ],
           ),
+        
+           StatefulShellBranch(
+            routes: <RouteBase>[
+              GoRoute(
+                // The screen to display as the root in the first tab of the
+                // bottom navigation bar.
+                path: '/d',
+                builder: (BuildContext context, GoRouterState state) =>
+                    const StatsScreen(),
+                routes: <RouteBase>[
+                  // The details screen to display stacked on navigator of the
+                  // first tab. This will cover screen A but not the application
+                  // shell (bottom navigation bar).
+                  GoRoute(
+                    path: 'details',
+                    builder: (BuildContext context, GoRouterState state) =>
+                        const DetailsScreen(label: 'Stats'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        
+        
         ],
+        
       ),
     ],
   );
