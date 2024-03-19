@@ -69,7 +69,9 @@ final GlobalKey<NavigatorState> _tabANavigatorKey =
                   // The details screen to display stacked on navigator of the
                   // first tab. This will cover screen A but not the application
                   // shell (bottom navigation bar).
+                  
                   GoRoute(
+                    parentNavigatorKey: _rootNavigatorKey,
                     path: 'details',
                     builder: (BuildContext context, GoRouterState state) =>
                         const DetailsScreen(label: 'A'),
@@ -93,6 +95,7 @@ final GlobalKey<NavigatorState> _tabANavigatorKey =
                   // first tab. This will cover screen A but not the application
                   // shell (bottom navigation bar).
                   GoRoute(
+                    parentNavigatorKey: _rootNavigatorKey,
                     path: 'details',
                     builder: (BuildContext context, GoRouterState state) =>
                         const DetailsScreen(label: 'WODs'),
