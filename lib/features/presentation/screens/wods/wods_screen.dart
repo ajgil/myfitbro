@@ -14,13 +14,19 @@ class WodScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text('Screen add workout', style: Theme.of(context).textTheme.titleLarge),
+            Text('Screen add your workouts', style: Theme.of(context).textTheme.titleMedium),
             const Padding(padding: EdgeInsets.all(4)),
             TextButton(
               onPressed: () {
-                GoRouter.of(context).go('/c/details');
+                GoRouter.of(context).go('/b/addwod');
               },
-              child: const Text('View details'),
+              child: const Text('Add EMOM'),
+            ),
+            TextButton(
+              onPressed: () {
+                GoRouter.of(context).go('/b/addwod');
+              },
+              child: const Text('Add AMRAP'),
             ),
           ],
         ),

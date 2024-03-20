@@ -39,7 +39,7 @@ class _TabbedRootScreenState extends State<TabbedRootScreen>
 
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Root of Section B (nested TabBar shell)'),
+          title: const Text('Root of Section C (nested TabBar shell)'),
           bottom: TabBar(
             controller: _tabController,
             tabs: tabs,

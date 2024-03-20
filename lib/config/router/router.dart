@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myfitbro/features/presentation/screens/details.dart';
+import 'package:myfitbro/features/presentation/screens/family_screen.dart';
+import 'package:myfitbro/features/presentation/screens/wods/add_wod.dart';
 import 'package:myfitbro/features/presentation/screens/root_screen_a.dart';
 import 'package:myfitbro/features/presentation/screens/stats_screen.dart';
-import 'package:myfitbro/features/presentation/screens/wods_screen.dart';
+import 'package:myfitbro/features/presentation/screens/wods/wods_screen.dart';
 import 'package:myfitbro/features/presentation/widgets/shared/scaffold_with_nabvar.dart';
 import 'package:myfitbro/features/presentation/widgets/shared/tabb_screen.dart';
 import 'package:myfitbro/features/presentation/widgets/shared/tabbed_root_screen.dart';
@@ -17,10 +19,10 @@ part 'router.g.dart';
 GoRouter appRouter(AppRouterRef ref) {
   //final authState = ref.watch(authRemoteRepositoryProvider);
 
-final GlobalKey<NavigatorState> _rootNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'root');
-final GlobalKey<NavigatorState> _tabANavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'tabBNav');
+  final GlobalKey<NavigatorState> _rootNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'root');
+  final GlobalKey<NavigatorState> _tabANavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'tabBNav');
 // This example demonstrates how to setup nested navigation using a
 // BottomNavigationBar, where each bar item uses its own persistent navigator,
 // i.e. navigation state is maintained separately for each item. This setup also
@@ -56,6 +58,7 @@ final GlobalKey<NavigatorState> _tabANavigatorKey =
         },
         branches: <StatefulShellBranch>[
           // The route branch for the first tab of the bottom navigation bar.
+          // home
           StatefulShellBranch(
             navigatorKey: _tabANavigatorKey,
             routes: <RouteBase>[
@@ -69,7 +72,7 @@ final GlobalKey<NavigatorState> _tabANavigatorKey =
                   // The details screen to display stacked on navigator of the
                   // first tab. This will cover screen A but not the application
                   // shell (bottom navigation bar).
-                  
+
                   GoRoute(
                     parentNavigatorKey: _rootNavigatorKey,
                     path: 'details',
@@ -81,13 +84,13 @@ final GlobalKey<NavigatorState> _tabANavigatorKey =
             ],
           ),
 
-          
+          // Add wods
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
                 // The screen to display as the root in the first tab of the
                 // bottom navigation bar.
-                path: '/c',
+                path: '/b',
                 builder: (BuildContext context, GoRouterState state) =>
                     const WodScreen(),
                 routes: <RouteBase>[
@@ -96,18 +99,16 @@ final GlobalKey<NavigatorState> _tabANavigatorKey =
                   // shell (bottom navigation bar).
                   GoRoute(
                     parentNavigatorKey: _rootNavigatorKey,
-                    path: 'details',
+                    path: 'addwod',
                     builder: (BuildContext context, GoRouterState state) =>
-                        const DetailsScreen(label: 'WODs'),
+                        const AddWodScreen(label: 'WODs'),
                   ),
                 ],
               ),
             ],
           ),
 
-
-
-
+          // screen with tabs
           // The route branch for the third tab of the bottom navigation bar.
           StatefulShellBranch(
             // StatefulShellBranch will automatically use the first descendant
@@ -139,17 +140,17 @@ final GlobalKey<NavigatorState> _tabANavigatorKey =
                 branches: <StatefulShellBranch>[
                   StatefulShellBranch(routes: <GoRoute>[
                     GoRoute(
-                      path: '/b1',
+                      path: '/c1',
                       builder: (BuildContext context, GoRouterState state) =>
                           const TabScreen(
-                              label: 'B1', detailsPath: '/b1/details'),
+                              label: 'C1', detailsPath: '/c1/details'),
                       routes: <RouteBase>[
                         GoRoute(
                           path: 'details',
                           builder:
                               (BuildContext context, GoRouterState state) =>
                                   const DetailsScreen(
-                            label: 'B1',
+                            label: 'C1',
                             withScaffold: false,
                           ),
                         ),
@@ -158,17 +159,17 @@ final GlobalKey<NavigatorState> _tabANavigatorKey =
                   ]),
                   StatefulShellBranch(routes: <GoRoute>[
                     GoRoute(
-                      path: '/b2',
+                      path: '/c2',
                       builder: (BuildContext context, GoRouterState state) =>
                           const TabScreen(
-                              label: 'B2', detailsPath: '/b2/details'),
+                              label: 'C2', detailsPath: '/c2/details'),
                       routes: <RouteBase>[
                         GoRoute(
                           path: 'details',
                           builder:
                               (BuildContext context, GoRouterState state) =>
                                   const DetailsScreen(
-                            label: 'B2',
+                            label: 'C2',
                             withScaffold: false,
                           ),
                         ),
@@ -179,12 +180,14 @@ final GlobalKey<NavigatorState> _tabANavigatorKey =
               ),
             ],
           ),
-        
-           StatefulShellBranch(
+
+          // stats
+          StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
                 // The screen to display as the root in the first tab of the
                 // bottom navigation bar.
+
                 path: '/d',
                 builder: (BuildContext context, GoRouterState state) =>
                     const StatsScreen(),
@@ -193,18 +196,26 @@ final GlobalKey<NavigatorState> _tabANavigatorKey =
                   // first tab. This will cover screen A but not the application
                   // shell (bottom navigation bar).
                   GoRoute(
+                      name: 'family',
+                      path: 'family/:fid',
+                      builder: (BuildContext context, GoRouterState state) {
+                        return FamilyScreen(
+                          fid: state.pathParameters['fid']!,
+                          asc: state.uri.queryParameters['sort'] == 'asc',
+                        );
+                      }),
+                  /*
+                  GoRoute(
                     path: 'details',
                     builder: (BuildContext context, GoRouterState state) =>
                         const DetailsScreen(label: 'Stats'),
                   ),
+                  */
                 ],
               ),
             ],
           ),
-        
-        
         ],
-        
       ),
     ],
   );

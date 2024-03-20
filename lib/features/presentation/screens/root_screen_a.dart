@@ -10,7 +10,7 @@ class RootScreenA extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Root of home'),
+        title: const Text('Root of home MyFitBro'),
       ),
       body: Center(
         child: Column(
