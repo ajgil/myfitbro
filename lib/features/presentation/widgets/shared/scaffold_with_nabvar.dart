@@ -40,7 +40,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
           
           BottomNavigationBarItem(
               icon: Icon(Icons.fitness_center), label: 'WODs'),
-          BottomNavigationBarItem(icon: Icon(Icons.stacked_bar_chart), label: 'Stats'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         currentIndex: navigationShell.currentIndex,
         onTap: (int index) => _onTap(context, index),

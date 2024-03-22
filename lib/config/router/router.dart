@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myfitbro/features/presentation/screens/details.dart';
 import 'package:myfitbro/features/presentation/screens/family_screen.dart';
+import 'package:myfitbro/features/presentation/screens/profile/profile_screen.dart';
 import 'package:myfitbro/features/presentation/screens/wods/add_wod.dart';
 import 'package:myfitbro/features/presentation/screens/root_screen_a.dart';
 import 'package:myfitbro/features/presentation/screens/stats_screen.dart';
@@ -58,7 +59,7 @@ GoRouter appRouter(AppRouterRef ref) {
         },
         branches: <StatefulShellBranch>[
           // The route branch for the first tab of the bottom navigation bar.
-          // home
+          // home -> named a
           StatefulShellBranch(
             navigatorKey: _tabANavigatorKey,
             routes: <RouteBase>[
@@ -84,7 +85,7 @@ GoRouter appRouter(AppRouterRef ref) {
             ],
           ),
 
-          // Add wods
+          // Add wods -> named b
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
@@ -108,7 +109,7 @@ GoRouter appRouter(AppRouterRef ref) {
             ],
           ),
 
-          // screen with tabs
+          // screen with tabs named c
           // The route branch for the third tab of the bottom navigation bar.
           StatefulShellBranch(
             // StatefulShellBranch will automatically use the first descendant
@@ -181,7 +182,8 @@ GoRouter appRouter(AppRouterRef ref) {
             ],
           ),
 
-          // stats
+          // named family
+          /*
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
@@ -212,6 +214,43 @@ GoRouter appRouter(AppRouterRef ref) {
                   ),
                   */
                 ],
+              ),
+            ],
+          ),
+          */
+          // user profile -> named /d
+          StatefulShellBranch(
+            routes: <RouteBase>[
+              GoRoute(
+                // The screen to display as the root in the first tab of the
+                // bottom navigation bar.
+
+                path: '/d',
+                builder: (BuildContext context, GoRouterState state) =>
+                    const ProfileScreen(),
+                /*
+                routes: <RouteBase>[
+                  // The details screen to display stacked on navigator of the
+                  // first tab. This will cover screen A but not the application
+                  // shell (bottom navigation bar).
+                  
+                  GoRoute(
+                      name: 'details',
+                      path: ':fid',
+                      builder: (BuildContext context, GoRouterState state) {
+                        return FamilyScreen(
+                          fid: state.pathParameters['fid']!,
+                          asc: state.uri.queryParameters['sort'] == 'asc',
+                        );
+                      }),
+
+                  GoRoute(
+                    path: 'details',
+                    builder: (BuildContext context, GoRouterState state) =>
+                        const DetailsScreen(label: 'Stats'),
+                  ),
+                ],
+                */
               ),
             ],
           ),
