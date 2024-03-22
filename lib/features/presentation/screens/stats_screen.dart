@@ -4,18 +4,16 @@ import 'package:myfitbro/features/auth/domain/entities/family_entity.dart';
 import 'package:myfitbro/features/auth/domain/entities/person_entity.dart';
 
 
-
-
 const Map<String, Family> _families = <String, Family>{
   'f1': Family(
-    name: 'Doe',
+    name: 'EMOM',
     people: <String, Person>{
       'p1': Person(name: 'Jane'),
       'p2': Person(name: 'John'),
     },
   ),
   'f2': Family(
-    name: 'Wong',
+    name: 'AMRAP',
     people: <String, Person>{
       'p1': Person(name: 'June'),
       'p2': Person(name: 'Xin'),

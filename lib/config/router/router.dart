@@ -188,7 +188,7 @@ GoRouter appRouter(AppRouterRef ref) {
                 // The screen to display as the root in the first tab of the
                 // bottom navigation bar.
 
-                path: '/d',
+                path: '/family',
                 builder: (BuildContext context, GoRouterState state) =>
                     const StatsScreen(),
                 routes: <RouteBase>[
@@ -197,7 +197,7 @@ GoRouter appRouter(AppRouterRef ref) {
                   // shell (bottom navigation bar).
                   GoRoute(
                       name: 'family',
-                      path: 'family/:fid',
+                      path: ':fid',
                       builder: (BuildContext context, GoRouterState state) {
                         return FamilyScreen(
                           fid: state.pathParameters['fid']!,
