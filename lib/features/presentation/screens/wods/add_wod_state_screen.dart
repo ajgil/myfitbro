@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 /// The details screen for either the A or B screen.
-class AddWodScreen extends StatefulWidget {
+class AddWodScreenS extends StatefulWidget {
   /// Constructs a [DetailsScreen].
-  const AddWodScreen({
+  const AddWodScreenS({
     required this.label,
     this.param,
     this.extra,
@@ -29,7 +29,7 @@ class AddWodScreen extends StatefulWidget {
 }
 
 /// The state for DetailsScreen
-class AddWodScreenState extends State<AddWodScreen> {
+class AddWodScreenState extends State<AddWodScreenS> {
   int _counter = 0;
 
   @override

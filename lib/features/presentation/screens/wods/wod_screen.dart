@@ -18,13 +18,13 @@ class WodScreen extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(4)),
             TextButton(
               onPressed: () {
-                GoRouter.of(context).go('/b/addwod');
+                GoRouter.of(context).go('/c/details');
               },
               child: const Text('Add EMOM'),
             ),
             TextButton(
               onPressed: () {
-                GoRouter.of(context).go('/b/addwod');
+                GoRouter.of(context).go('/c/details');
               },
               child: const Text('Add AMRAP'),
             ),

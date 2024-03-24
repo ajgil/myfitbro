@@ -4,16 +4,15 @@ import 'package:myfitbro/features/auth/domain/entities/family_entity.dart';
 import 'package:myfitbro/features/auth/domain/entities/person_entity.dart';
 
 
-
 const Map<String, Family> _families = <String, Family>{
-  'f1': Family(
-    name: 'EMOM',
+  'c1': Family(
+    name: 'Fuerza',
     people: <String, Person>{
       'p1': Person(name: 'Jane'),
       'p2': Person(name: 'John'),
     },
   ),
-  'f2': Family(
+  'c2': Family(
     name: 'AMRAP',
     people: <String, Person>{
       'p1': Person(name: 'June'),
@@ -36,6 +35,7 @@ class FamilyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     final Map<String, String> newQueries;
     final List<String> names = _families[fid]!
         .people

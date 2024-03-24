@@ -5,10 +5,12 @@ import 'package:go_router/go_router.dart';
 import 'package:myfitbro/features/presentation/screens/details.dart';
 import 'package:myfitbro/features/presentation/screens/family_screen.dart';
 import 'package:myfitbro/features/presentation/screens/profile/profile_screen.dart';
-import 'package:myfitbro/features/presentation/screens/wods/add_wod.dart';
+import 'package:myfitbro/features/presentation/screens/search/search_screen.dart';
+import 'package:myfitbro/features/presentation/screens/wods/add_wod_screen.dart';
+import 'package:myfitbro/features/presentation/screens/wods/add_wod_state_screen.dart';
 import 'package:myfitbro/features/presentation/screens/root_screen_a.dart';
 import 'package:myfitbro/features/presentation/screens/stats_screen.dart';
-import 'package:myfitbro/features/presentation/screens/wods/wods_screen.dart';
+import 'package:myfitbro/features/presentation/screens/wods/wod_screen.dart';
 import 'package:myfitbro/features/presentation/widgets/shared/scaffold_with_nabvar.dart';
 import 'package:myfitbro/features/presentation/widgets/shared/tabb_screen.dart';
 import 'package:myfitbro/features/presentation/widgets/shared/tabbed_root_screen.dart';
@@ -85,7 +87,7 @@ GoRouter appRouter(AppRouterRef ref) {
             ],
           ),
 
-          // Add wods -> named b
+          // search -> named b
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
@@ -93,11 +95,9 @@ GoRouter appRouter(AppRouterRef ref) {
                 // bottom navigation bar.
                 path: '/b',
                 builder: (BuildContext context, GoRouterState state) =>
-                    const WodScreen(),
+                    const SearchScreen(),
+                /*
                 routes: <RouteBase>[
-                  // The details screen to display stacked on navigator of the
-                  // first tab. This will cover screen A but not the application
-                  // shell (bottom navigation bar).
                   GoRoute(
                     parentNavigatorKey: _rootNavigatorKey,
                     path: 'addwod',
@@ -105,34 +105,26 @@ GoRouter appRouter(AppRouterRef ref) {
                         const AddWodScreen(label: 'WODs'),
                   ),
                 ],
+                */
               ),
             ],
           ),
 
+          /*
           // screen with tabs named c
-          // The route branch for the third tab of the bottom navigation bar.
+       
           StatefulShellBranch(
-            // StatefulShellBranch will automatically use the first descendant
-            // GoRoute as the initial location of the branch. If another route
-            // is desired, specify the location of it using the defaultLocation
-            // parameter.
-            // defaultLocation: '/c2',
             routes: <RouteBase>[
               StatefulShellRoute(
                 builder: (BuildContext context, GoRouterState state,
                     StatefulNavigationShell navigationShell) {
-                  // Just like with the top level StatefulShellRoute, no
-                  // customization is done in the builder function.
+           
                   return navigationShell;
                 },
                 navigatorContainerBuilder: (BuildContext context,
                     StatefulNavigationShell navigationShell,
                     List<Widget> children) {
-                  // Returning a customized container for the branch
-                  // Navigators (i.e. the `List<Widget> children` argument).
-                  //
-                  // See TabbedRootScreen for more details on how the children
-                  // are managed (in a TabBarView).
+                 
                   return TabbedRootScreen(
                       navigationShell: navigationShell, children: children);
                 },
@@ -181,43 +173,38 @@ GoRouter appRouter(AppRouterRef ref) {
               ),
             ],
           ),
-
-          // named family
-          /*
+          */
+          // Add wod -> named c
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                // The screen to display as the root in the first tab of the
-                // bottom navigation bar.
-
-                path: '/family',
+                path: '/c',
                 builder: (BuildContext context, GoRouterState state) =>
-                    const StatsScreen(),
+                    const AddWodScreen(),
                 routes: <RouteBase>[
-                  // The details screen to display stacked on navigator of the
-                  // first tab. This will cover screen A but not the application
-                  // shell (bottom navigation bar).
                   GoRoute(
-                      name: 'family',
-                      path: ':fid',
+                      name: 'new',
+                      path: 'new/:fid',
                       builder: (BuildContext context, GoRouterState state) {
+                        //params = state.extra;
                         return FamilyScreen(
+                          
                           fid: state.pathParameters['fid']!,
                           asc: state.uri.queryParameters['sort'] == 'asc',
                         );
                       }),
-                  /*
+                  
                   GoRoute(
                     path: 'details',
                     builder: (BuildContext context, GoRouterState state) =>
-                        const DetailsScreen(label: 'Stats'),
+                        const DetailsScreen(label: 'new WOD'),
                   ),
-                  */
+
                 ],
               ),
             ],
           ),
-          */
+          
           // user profile -> named /d
           StatefulShellBranch(
             routes: <RouteBase>[
@@ -230,9 +217,6 @@ GoRouter appRouter(AppRouterRef ref) {
                     const ProfileScreen(),
                 /*
                 routes: <RouteBase>[
-                  // The details screen to display stacked on navigator of the
-                  // first tab. This will cover screen A but not the application
-                  // shell (bottom navigation bar).
                   
                   GoRoute(
                       name: 'details',
