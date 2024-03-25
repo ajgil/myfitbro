@@ -102,8 +102,7 @@ class _VerificationParamsScreen extends ConsumerState<VerificationScreen> {
                 controller: _codeCtrl,
                 //readOnly: _isSubmitting,
                 label: 'Código',
-
-                keyboardType: TextInputType.name,
+                keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Missing the verification code';

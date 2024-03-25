@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myfitbro/features/auth/domain/entities/family_entity.dart';
+import 'package:myfitbro/features/auth/domain/entities/item_entity.dart';
 import 'package:myfitbro/features/auth/domain/entities/person_entity.dart';
-
+import 'package:myfitbro/features/presentation/screens/wods/forms/add_form.dart';
 
 const Map<String, Family> _families = <String, Family>{
   'c1': Family(
-    name: 'Fuerza',
+    name: 'EMOM',
     people: <String, Person>{
       'p1': Person(name: 'Jane'),
       'p2': Person(name: 'John'),
@@ -22,13 +23,30 @@ const Map<String, Family> _families = <String, Family>{
 };
 
 
+const Map<String, Items> _items = <String, Items>{
+  '1': Items(
+    item: 'squats',
+  ),
+  '2': Items(
+    item: 'pistol',
+  ),
+};
+
+
+
+
 /// The screen that shows a list of persons in a family.
 class FamilyScreen extends StatelessWidget {
   /// Creates a [FamilyScreen].
-  const FamilyScreen({required this.fid, required this.asc, super.key});
+  const FamilyScreen(
+      {required this.fid,
+      required this.category,
+      required this.asc,
+      super.key});
 
   /// The family to display.
   final String fid;
+  final String category;
 
   /// Whether to sort the name in ascending order.
   final bool asc;
@@ -36,37 +54,22 @@ class FamilyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    
-    final Map<String, String> newQueries;
-    final List<String> names = _families[fid]!
-        .people
-        .values
-        .map<String>((Person p) => p.name)
-        .toList();
-    names.sort();
-    if (asc) {
-      newQueries = const <String, String>{'sort': 'desc'};
-    } else {
-      newQueries = const <String, String>{'sort': 'asc'};
-    }
     return Scaffold(
       appBar: AppBar(
-        title: Text(_families[fid]!.name),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () => context.goNamed('family',
-                pathParameters: <String, String>{'fid': fid},
-                queryParameters: newQueries),
-            tooltip: 'sort ascending or descending',
-            icon: const Icon(Icons.sort),
-          )
-        ],
+        title: Text('add your wod - 2 screen $category'),//_families[fid]!.name), 
+       
       ),
       body: ListView(
         children: <Widget>[
-          for (final String name in asc ? names : names.reversed)
+          for (final MapEntry<String, Items> entry in _items.entries)
             ListTile(
-              title: Text(name),
-            ),
+              title: Text(entry.value.item),
+              onTap: () => showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return AddItem();
+            }),
+            )
         ],
       ),
     );

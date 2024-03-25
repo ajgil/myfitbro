@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myfitbro/features/auth/domain/entities/category_entity.dart';
 
-
+// get cateegories from backend
 const Map<String, Categories> _categories = <String, Categories>{
   'c1': Categories(
     category: 'EMOM',
@@ -28,7 +28,7 @@ class AddWodScreen extends StatelessWidget {
           for (final MapEntry<String, Categories> entry in _categories.entries)
             ListTile(
               title: Text(entry.value.category),
-              onTap: () => context.go('/c/new/${entry.key}'),
+              onTap: () => context.go('/c/new/${entry.key}', extra: entry.value.category),
             )
         ],
       ),

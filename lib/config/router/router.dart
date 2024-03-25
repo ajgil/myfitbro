@@ -26,6 +26,8 @@ GoRouter appRouter(AppRouterRef ref) {
       GlobalKey<NavigatorState>(debugLabel: 'root');
   final GlobalKey<NavigatorState> _tabANavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'tabBNav');
+      final GlobalKey<NavigatorState> _sectionANavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'sectionANav');
 // This example demonstrates how to setup nested navigation using a
 // BottomNavigationBar, where each bar item uses its own persistent navigator,
 // i.e. navigation state is maintained separately for each item. This setup also
@@ -188,7 +190,7 @@ GoRouter appRouter(AppRouterRef ref) {
                       builder: (BuildContext context, GoRouterState state) {
                         //params = state.extra;
                         return FamilyScreen(
-                          
+                          category: state.extra as String,
                           fid: state.pathParameters['fid']!,
                           asc: state.uri.queryParameters['sort'] == 'asc',
                         );

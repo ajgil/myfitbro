@@ -17,6 +17,7 @@ class MyFitBro extends ConsumerWidget {
     final _routes = ref.watch(appRouterProvider);
     return MaterialApp.router(
       title: F.title,
+       debugShowCheckedModeBanner: false,
       //theme: AppTheme(Brightness.light).themeData,
       //darkTheme: AppTheme(Brightness.dark).themeData,
       theme: AppTheme().getTheme(),
