@@ -43,12 +43,6 @@ GoRouter appRouter(AppRouterRef ref) {
       StatefulShellRoute(
         builder: (BuildContext context, GoRouterState state,
             StatefulNavigationShell navigationShell) {
-          // This nested StatefulShellRoute demonstrates the use of a
-          // custom container for the branch Navigators. In this implementation,
-          // no customization is done in the builder function (navigationShell
-          // itself is simply used as the Widget for the route). Instead, the
-          // navigatorContainerBuilder function below is provided to
-          // customize the container for the branch Navigators.
           return navigationShell;
         },
         navigatorContainerBuilder: (BuildContext context,

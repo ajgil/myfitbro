@@ -22,7 +22,6 @@ const Map<String, Family> _families = <String, Family>{
   ),
 };
 
-
 const Map<String, Items> _items = <String, Items>{
   '1': Items(
     item: 'squats',
@@ -31,9 +30,6 @@ const Map<String, Items> _items = <String, Items>{
     item: 'pistol',
   ),
 };
-
-
-
 
 /// The screen that shows a list of persons in a family.
 class FamilyScreen extends StatelessWidget {
@@ -53,11 +49,10 @@ class FamilyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       appBar: AppBar(
-        title: Text('add your wod - 2 screen $category'),//_families[fid]!.name), 
-       
+        title:
+            Text('add your wod - 2 screen $category'), //_families[fid]!.name),
       ),
       body: ListView(
         children: <Widget>[
@@ -65,10 +60,13 @@ class FamilyScreen extends StatelessWidget {
             ListTile(
               title: Text(entry.value.item),
               onTap: () => showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return AddItem();
-            }),
+                  //isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  barrierColor: Colors.transparent,
+                  context: context,
+                  builder: (_) {
+                    return AddItem();
+                  }),
             )
         ],
       ),

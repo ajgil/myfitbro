@@ -1,0 +1,21 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'weight_provider.g.dart';
+
+
+@riverpod
+class Weight extends _$Weight {
+  @override
+ int build() => 5;
+
+ // incrementar la cantidad
+  void increaseByOne() {
+    state++;
+  }
+
+  void increaseByTwo() {
+    state = state + 2;
+  }
+
+
+}
