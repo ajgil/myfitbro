@@ -5,11 +5,15 @@ part 'counter_provider.g.dart';
 @riverpod
 class Counter extends _$Counter {
   @override
-  int build() => 5;
+  int build() => 1;
 
 // incrementar la cantidad
   void increaseByOne() {
     state++;
+  }
+
+  void decreaseByOne() {
+    state--;
   }
 }
 

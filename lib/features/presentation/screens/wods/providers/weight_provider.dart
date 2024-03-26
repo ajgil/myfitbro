@@ -17,5 +17,8 @@ class Weight extends _$Weight {
     state = state + 2;
   }
 
+  void decreaseByOne() {
+    state--;
+  }
 
 }

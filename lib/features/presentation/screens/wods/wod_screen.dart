@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myfitbro/features/presentation/screens/wods/forms/add_form.dart';
+import 'package:myfitbro/features/presentation/screens/wods/forms/add_item_screen.dart';
 import 'package:myfitbro/features/presentation/screens/wods/forms/edit_form.dart';
 import 'package:myfitbro/features/state_management.dart';
 
@@ -83,7 +83,7 @@ class WodScreenRiverpod extends ConsumerWidget {
         onPressed: () => showModalBottomSheet(
             context: context,
             builder: (context) {
-              return AddItem();
+              return AddItemScreen();
             }),
       ),
     );

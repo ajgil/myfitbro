@@ -1,16 +1,17 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfitbro/features/presentation/screens/wods/providers/counter_provider.dart';
 import 'package:myfitbro/features/presentation/screens/wods/providers/weight_provider.dart';
 import 'package:myfitbro/features/state_management.dart';
 
-class AddItem extends ConsumerWidget {
+class AddItemScreen extends ConsumerWidget {
   final TextEditingController weightController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
 
-  AddItem({super.key});
+  AddItemScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,7 +40,7 @@ class AddItem extends ConsumerWidget {
               wodName,
               style: const TextStyle(fontSize: 15),
             ),
-             TextButton.icon(
+            TextButton.icon(
               icon: const Icon(
                 Icons.refresh_rounded,
                 size: 20,
@@ -47,7 +48,9 @@ class AddItem extends ConsumerWidget {
               //label: Text(wodName, style: const TextStyle(fontSize: 20)),
               label: const Text('nombre aleatorio'),
               onPressed: () {
-                ref.read(wodNameProvider.notifier).changeWodName(Random(3) as String);
+                ref
+                    .read(wodNameProvider.notifier)
+                    .changeWodName(Random(3) as String);
               },
             ),
             IconButton(
@@ -64,17 +67,34 @@ class AddItem extends ConsumerWidget {
             const SizedBox(
               height: 5,
             ),
+            // Incrementar - decreamentar repeticiones
             Text('Cantidad Reps', style: textStyles.titleSmall),
-            TextButton.icon(
-              icon: const Icon(
-                Icons.add,
-                size: 20,
-              ),
-              label: Text('$counter', style: const TextStyle(fontSize: 40)),
-              onPressed: () {
-                ref.read(counterProvider.notifier).increaseByOne();
-              },
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.remove),
+                  onPressed: () {
+                    ref.read(counterProvider.notifier).decreaseByOne();
+                  },
+                ),
+                SizedBox(
+                    width: 60,
+                    child: Text('$counter',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 40,
+                        ))),
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    ref.read(counterProvider.notifier).increaseByOne();
+                  },
+                ),
+              ],
             ),
+
             /*
           CustomTextFormField(
             controller: quantityController,
@@ -93,16 +113,32 @@ class AddItem extends ConsumerWidget {
               height: 5,
             ),
             Text('Peso Kgs', style: textStyles.titleSmall),
-            TextButton.icon(
-              icon: const Icon(
-                Icons.add,
-                size: 20,
-              ),
-              label: Text('$weight', style: const TextStyle(fontSize: 40)),
-              onPressed: () {
-                ref.read(weightProvider.notifier).increaseByTwo();
-              },
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.remove),
+                  onPressed: () {
+                    ref.read(weightProvider.notifier).decreaseByOne();
+                  },
+                ),
+                SizedBox(
+                    width: 60,
+                    child: Text('$weight',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 40,
+                        ))),
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    ref.read(weightProvider.notifier).increaseByOne();
+                  },
+                ),
+              ],
             ),
+
             /*
             CustomTextFormField(
               controller: weightController,

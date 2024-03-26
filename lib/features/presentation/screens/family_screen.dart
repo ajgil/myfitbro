@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:myfitbro/features/auth/domain/entities/family_entity.dart';
 import 'package:myfitbro/features/auth/domain/entities/item_entity.dart';
 import 'package:myfitbro/features/auth/domain/entities/person_entity.dart';
-import 'package:myfitbro/features/presentation/screens/wods/forms/add_form.dart';
+import 'package:myfitbro/features/presentation/screens/wods/forms/add_item_screen.dart';
 
 const Map<String, Family> _families = <String, Family>{
   'c1': Family(
@@ -65,7 +65,7 @@ class FamilyScreen extends StatelessWidget {
                   barrierColor: Colors.transparent,
                   context: context,
                   builder: (_) {
-                    return AddItem();
+                    return AddItemScreen();
                   }),
             )
         ],
