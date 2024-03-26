@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'weight_provider.g.dart';
 
 
-@riverpod
+@Riverpod(keepAlive: true)
 class Weight extends _$Weight {
   @override
  int build() => 5;

@@ -6,11 +6,11 @@ part of 'counter_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$counterHash() => r'ac2343d0e78d0c2f1b03053c6326fdada32f2d9c';
+String _$counterHash() => r'c67341748236d581b0f6dd97161167e009c86823';
 
 /// See also [Counter].
 @ProviderFor(Counter)
-final counterProvider = AutoDisposeNotifierProvider<Counter, int>.internal(
+final counterProvider = NotifierProvider<Counter, int>.internal(
   Counter.new,
   name: r'counterProvider',
   debugGetCreateSourceHash:
@@ -19,7 +19,7 @@ final counterProvider = AutoDisposeNotifierProvider<Counter, int>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef _$Counter = AutoDisposeNotifier<int>;
+typedef _$Counter = Notifier<int>;
 String _$darkModeHash() => r'54d687970391283e693e0beb87bef8e54d34d8da';
 
 /// See also [DarkMode].

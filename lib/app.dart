@@ -15,7 +15,7 @@ class MyFitBro extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //final routes = ref.watch(appRouterProvider);
-    final _routes = ref.watch(appRouterProvider);
+    final routes = ref.watch(appRouterProvider);
     final isDarkMode = ref.watch(darkModeProvider);
     return MaterialApp.router(
       title: F.title,
@@ -25,7 +25,7 @@ class MyFitBro extends ConsumerWidget {
       theme: AppTheme( isDarkMode: isDarkMode ).getTheme(),
       //localizationsDelegates: AppLocalizations.localizationsDelegates,
       //routerConfig: routes,
-      routerConfig: _routes,
+      routerConfig: routes,
     );
   }
 }
