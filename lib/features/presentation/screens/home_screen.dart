@@ -45,7 +45,7 @@ class HomeScreen extends ConsumerWidget {
       ),
       */
       body: const _HomeView(),
-      bottomNavigationBar: CustomBottomNavigation(currentIndex: pageIndex,),
+      //bottomNavigationBar: CustomBottomNavigation(currentIndex: pageIndex,),
       /*     
       body: organization.when(
         data: (data) {
@@ -92,7 +92,6 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   @override
   void initState() {
     super.initState();
-    
     //! add los providers que queramos consumir
     //ref.read( upcomingMoviesProvider.notifier ).loadNextPage();
   }
@@ -100,7 +99,6 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
-
     return const Center(
         child: Text('Main dashboard', style: TextStyle(fontSize: 20)),
       );
