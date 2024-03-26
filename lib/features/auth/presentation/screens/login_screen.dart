@@ -39,7 +39,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         if (mounted) {
           //ref.read(appRouterProvider).go('/home');
           //ref.read(appRouterProvider).pop();
-          ref.read(appRouterProvider).push('/home');
+          ref.read(appRouterProvider).go('/a');
         }
       } catch (e) {
         

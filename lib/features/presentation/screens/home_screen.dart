@@ -1,8 +1,8 @@
 //import 'package:myfitbro/features/auth/application/controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myfitbro/config/router/router.dart';
-import 'package:myfitbro/features/auth/data/datasources/remote/auth_remote_repository.dart';
+//import 'package:myfitbro/config/router/router.dart';
+//import 'package:myfitbro/features/auth/data/datasources/remote/auth_remote_repository.dart';
 import 'package:myfitbro/features/presentation/widgets/widgets.dart';
 
 /// Main page for authorized users
@@ -95,7 +95,6 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     //! add los providers que queramos consumir
     //ref.read( upcomingMoviesProvider.notifier ).loadNextPage();
   }
-
 
   @override
   Widget build(BuildContext context) {

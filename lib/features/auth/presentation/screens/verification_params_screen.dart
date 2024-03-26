@@ -68,7 +68,7 @@ class _VerificationParamsScreen extends ConsumerState<VerificationScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Successfully signed up')));
 
-        ref.read(appRouterProvider).push('/home');
+        ref.read(appRouterProvider).go('/a');
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$e')));

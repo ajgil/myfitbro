@@ -12,11 +12,8 @@ import 'package:myfitbro/features/presentation/screens/family_screen.dart';
 import 'package:myfitbro/features/presentation/screens/profile/profile_screen.dart';
 import 'package:myfitbro/features/presentation/screens/search/search_screen.dart';
 import 'package:myfitbro/features/presentation/screens/wods/add_wod_screen.dart';
-
 import 'package:myfitbro/features/presentation/screens/root_screen_a.dart';
-
 import 'package:myfitbro/features/presentation/widgets/shared/scaffold_with_nabvar.dart';
-
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
@@ -27,6 +24,8 @@ GoRouter appRouter(AppRouterRef ref) {
 
   final GlobalKey<NavigatorState> rootNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'root');
+  final GlobalKey<NavigatorState> shellNavigatorKey = 
+  GlobalKey<NavigatorState>(debugLabel: 'shell');
   final GlobalKey<NavigatorState> tabANavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'tabBNav');
   // ignore: unused_local_variable
@@ -44,6 +43,37 @@ GoRouter appRouter(AppRouterRef ref) {
       debugLogDiagnostics: true,
       navigatorKey: rootNavigatorKey,
       initialLocation: RouterPath.signin,
+
+      // redirect
+      redirect: (context, state) async {
+        // If our async state is loading, don't perform redirects, yet
+        //if (authState.isLoading || authState.hasError) return null;
+        final loggedIn = authState.currentSession?.user != null;
+        log('variable loggedIn: $loggedIn');
+        switch (state.matchedLocation) {
+          case RouterPath.signin:
+            if (loggedIn) {
+              return RouterPath.home;
+            } else {
+              return RouterPath.signin;
+            }
+          case RouterPath.signup:
+            if (loggedIn) {
+              return RouterPath.home;
+            } else {
+              return RouterPath.signup;
+            }
+          case RouterPath.home:
+            if (loggedIn) {
+              return RouterPath.home;
+            } else {
+              return RouterPath.signin;
+            }
+          default:
+            return null;
+        }
+      },
+
       routes: <RouteBase>[
         GoRoute(
           path: RouterPath.signin,
@@ -68,15 +98,17 @@ GoRouter appRouter(AppRouterRef ref) {
             return VerificationScreen(params: params);
           },
         ),
+
+        
         StatefulShellRoute(
+
           builder: (BuildContext context, GoRouterState state,
               StatefulNavigationShell navigationShell) {
             return navigationShell;
           },
           navigatorContainerBuilder: (BuildContext context,
               StatefulNavigationShell navigationShell, List<Widget> children) {
-            // Returning a customized container for the branch
-            // Navigators (i.e. the `List<Widget> children` argument).
+
             //
             // See ScaffoldWithNavBar for more details on how the children
             // are managed (using AnimatedBranchContainer).
@@ -264,34 +296,7 @@ GoRouter appRouter(AppRouterRef ref) {
           ],
         ),
       ],
-      redirect: (context, state) async {
-        // If our async state is loading, don't perform redirects, yet
-        //if (authState.isLoading || authState.hasError) return null;
-        final loggedIn = authState.currentSession?.user != null;
-        log('variable loggedIn: $loggedIn');
-        switch (state.matchedLocation) {
-          case RouterPath.signin:
-            if (loggedIn) {
-              return RouterPath.home;
-            } else {
-              return RouterPath.signin;
-            }
-          case RouterPath.signup:
-            if (loggedIn) {
-              return RouterPath.home;
-            } else {
-              return RouterPath.signup;
-            }
-          case RouterPath.home:
-            if (loggedIn) {
-              return RouterPath.home;
-            } else {
-              return RouterPath.signin;
-            }
-          default:
-            return null;
-        }
-      },
+      
 
       // Pangina no encontrada -> 404
       errorPageBuilder: (context, state) {
