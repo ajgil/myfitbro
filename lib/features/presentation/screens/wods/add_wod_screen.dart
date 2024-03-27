@@ -24,15 +24,16 @@ class AddWodScreen extends StatelessWidget {
       ),
       body: 
         ListView(
-        children: <Widget>[
+        children: [
           for (final MapEntry<String, Categories> entry in _categories.entries)
             ListTile(
               title: Text(entry.value.category),
+              subtitle: const Text('crea tu propio wod'),
+              trailing: const Icon(Icons.arrow_forward_ios_rounded),
               onTap: () => context.go('/c/new/${entry.key}', extra: entry.value.category),
             )
         ],
       ),
-      );
-      
+      );    
   }
 }
