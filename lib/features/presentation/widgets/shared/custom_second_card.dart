@@ -12,6 +12,13 @@ class CustomSecondCardsScreen extends StatelessWidget {
     "Here is list 4 subtitle"
   ];
 
+  final List<String> images = [
+    'https://cdn.pixabay.com/photo/2021/06/01/07/03/sparrow-6300790_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2017/10/20/10/58/elephant-2870777_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2014/09/08/17/32/humming-bird-439364_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2018/05/03/22/34/lion-3372720_960_720.jpg'
+  ];
+
   @override
   Widget build(BuildContext context) {
     final textStyles = Theme.of(context).textTheme;
@@ -20,70 +27,89 @@ class CustomSecondCardsScreen extends StatelessWidget {
         itemCount: titles.length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
-          
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
-          ),
-          // Define how the card's content should be clipped
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          // Define the child widget of the card
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // Add padding around the row widget
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    // Add an image widget to display an image
-
-                    Image.asset(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+            ),
+            // Define how the card's content should be clipped
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            // Define the child widget of the card
+            child: InkWell(
+              onTap: () {
+                    /*
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('${titles[index]} pressed!'),
+                    ));
+                    */
+                    debugPrint(titles[index]);
+                  },
+                  child: 
+                  Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                // Add padding around the row widget
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Image.network(
+                        images[index],
+                        height: 90,
+                        width: 100,
+                        fit: BoxFit.cover,
+                      ),
+                      // Add an image widget to display an image
+                      /*Image.asset(
                       ImgSample.get('readbook.png'),
                       height: 80,
                       width: 60,
                       fit: BoxFit.cover,
                     ),
-                    // Add some spacing between the image and the text
-                    Container(width: 20),
-                    // Add an expanded widget to take up the remaining horizontal space
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          // Add some spacing between the top of the card and the title
-                          Container(height: 5),
-                          // Add a title widget
-                          Text(titles[index], style: textStyles.titleMedium),
-                        
-                          // Add some spacing between the title and the subtitle
-                          //Container(height: 5),
-                          const SizedBox(height: 5),
-                          // Add a subtitle widget
-                          Text(
-                            subtitles[index],
-                            style: MyTextSample.body1(context)!.copyWith(
-                              color: Colors.grey[500],
+                    */
+                      // Add some spacing between the image and the text
+                      Container(width: 20),
+                      // Add an expanded widget to take up the remaining horizontal space
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            // Add some spacing between the top of the card and the title
+                            Container(height: 5),
+                            // Add a title widget
+                            Text(titles[index], style: textStyles.titleMedium),
+
+                            // Add some spacing between the title and the subtitle
+                            //Container(height: 5),
+                            const SizedBox(height: 5),
+                            // Add a subtitle widget
+                            Text(
+                              subtitles[index],
+                              style: MyTextSample.body1(context)!.copyWith(
+                                color: Colors.grey[500],
+                              ),
                             ),
-                          ),
-                          // Add some spacing between the subtitle and the text
-                          Container(height: 10),
-                          // Add a text widget to display some text
-                          Text(
-                            MyStringsSample.cardText,
-                            maxLines: 2,
-                            style: MyTextSample.body2(context)!.copyWith(
-                              color: Colors.grey[700],
+                            // Add some spacing between the subtitle and the text
+                            Container(height: 10),
+                            // Add a text widget to display some text
+                            Text(
+                              MyStringsSample.cardText,
+                              maxLines: 2,
+                              style: MyTextSample.body2(context)!.copyWith(
+                                color: Colors.grey[700],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+
+            ), 
+            
+            
           );
         });
   }
@@ -118,8 +144,6 @@ Widget card(String image, String title, BuildContext context) {
   );
 }
 */
-
-
 
 class MyStringsSample {
   static const String loremIpsum =

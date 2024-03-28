@@ -11,14 +11,19 @@ class ListCardsScreen extends StatelessWidget {
     "Here is list 3 subtitle",
     "Here is list 4 subtitle"
   ];
-  final icons = [Icons.ac_unit, Icons.access_alarm, Icons.access_time, Icons.sports_bar];
+  final icons = [
+    Icons.ac_unit,
+    Icons.access_alarm,
+    Icons.access_time,
+    Icons.sports_bar
+  ];
 
-final List<String> images = [
-  'https://cdn.pixabay.com/photo/2021/06/01/07/03/sparrow-6300790_960_720.jpg',
-  'https://cdn.pixabay.com/photo/2017/10/20/10/58/elephant-2870777_960_720.jpg',
-  'https://cdn.pixabay.com/photo/2014/09/08/17/32/humming-bird-439364_960_720.jpg',
-  'https://cdn.pixabay.com/photo/2018/05/03/22/34/lion-3372720_960_720.jpg'
-];
+  final List<String> images = [
+    'https://cdn.pixabay.com/photo/2021/06/01/07/03/sparrow-6300790_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2017/10/20/10/58/elephant-2870777_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2014/09/08/17/32/humming-bird-439364_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2018/05/03/22/34/lion-3372720_960_720.jpg'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +31,9 @@ final List<String> images = [
         itemCount: titles.length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
               clipBehavior: Clip.hardEdge,
               child: ListTile(
                   onTap: () {
@@ -44,8 +52,7 @@ final List<String> images = [
                           "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
                           */
                   leading: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          images[index])),
+                      backgroundImage: NetworkImage(images[index])),
                   trailing: Icon(icons[index])));
         });
   }
