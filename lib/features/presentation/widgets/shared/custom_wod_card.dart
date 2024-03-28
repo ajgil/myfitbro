@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomSecondCardsScreen extends StatelessWidget {
-  CustomSecondCardsScreen({super.key});
+class CustomWodCardScreen extends StatelessWidget {
+  CustomWodCardScreen({super.key});
 
   final List<String> titles = ['Sparrow', 'Elephant', 'Humming Bird', 'Lion'];
 

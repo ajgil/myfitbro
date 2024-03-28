@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myfitbro/features/presentation/widgets/shared/custom_list_card.dart';
-import 'package:myfitbro/features/presentation/widgets/shared/custom_second_card.dart';
+//import 'package:myfitbro/features/presentation/widgets/shared/custom_list_card.dart';
+import 'package:myfitbro/features/presentation/widgets/shared/custom_wod_card.dart';
 
 /// Widget for the root page for the first section of the bottom navigation bar.
 class RootScreenA extends StatelessWidget {
@@ -59,7 +59,7 @@ class _ProfileView extends StatelessWidget {
         const SizedBox(height: 5),
         //Expanded(child: ListCardsScreen()),
         const SizedBox(height: 5),
-        Expanded(child: CustomSecondCardsScreen()),
+        Expanded(child: CustomWodCardScreen()),
       ],
 /*
         /// Listado de workouts en formato cards
