@@ -24,20 +24,11 @@ GoRouter appRouter(AppRouterRef ref) {
 
   final GlobalKey<NavigatorState> rootNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'root');
-  final GlobalKey<NavigatorState> shellNavigatorKey = 
-  GlobalKey<NavigatorState>(debugLabel: 'shell');
   final GlobalKey<NavigatorState> tabANavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'tabBNav');
   // ignore: unused_local_variable
   final GlobalKey<NavigatorState> sectionANavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'sectionANav');
-// This example demonstrates how to setup nested navigation using a
-// BottomNavigationBar, where each bar item uses its own persistent navigator,
-// i.e. navigation state is maintained separately for each item. This setup also
-// enables deep linking into nested pages.
-//
-// This example also demonstrates how build a nested shell with a custom
-// container for the branch Navigators (in this case a TabBarView).
 
   return GoRouter(
       debugLogDiagnostics: true,
@@ -109,9 +100,6 @@ GoRouter appRouter(AppRouterRef ref) {
           navigatorContainerBuilder: (BuildContext context,
               StatefulNavigationShell navigationShell, List<Widget> children) {
 
-            //
-            // See ScaffoldWithNavBar for more details on how the children
-            // are managed (using AnimatedBranchContainer).
             return ScaffoldWithNavBar(
                 navigationShell: navigationShell, children: children);
           },
